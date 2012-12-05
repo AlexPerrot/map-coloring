@@ -1,0 +1,29 @@
+\ProvidesPackage{citation}[1996/04/04 autcite LaTeX package]
+\RequirePackage{ifthen}
+\RequirePackage{xcolor}
+
+\newboolean{auteurcit@tionpresent}
+\newsavebox{\auteurcit@tion}
+\newsavebox{\boitecit@tion}
+\newlength{\cit@tionwidth}
+\setlength{\cit@tionwidth}{.87\linewidth}
+\definecolor{coulcit@tion}{rgb}{0.90,0.90,0.90}%
+
+\newenvironment{unecitation}[1][]{%
+  \ifthenelse{\equal{#1}{}}{%
+    \setboolean{auteurcit@tionpresent}{false}}{%
+    \setboolean{auteurcit@tionpresent}{true}%
+    \savebox{\auteurcit@tion}{#1}}%
+  \begin{lrbox}{\boitecit@tion}%
+    \begin{minipage}{.8\linewidth}%
+      \setlength{\parindent}{10pt}%
+      \small\slshape«\ignorespaces}%
+    {\unskip»
+      \ifthenelse{\boolean{auteurcit@tionpresent}}%
+      {\par\nopagebreak\hfill\usebox{\auteurcit@tion}}%
+      {}%
+    \end{minipage}\end{lrbox}
+  \begin{center}
+    {\setlength{\fboxsep}{10pt}%
+    \colorbox{coulcit@tion}{\usebox{\boitecit@tion}}}
+  \end{center}}

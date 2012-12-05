@@ -1,0 +1,130 @@
+\section{Conventions de codage}\label{annexe-conventions}
+
+\subsection{Langue}
+
+La langue du code doit impérativement être l'Anglais. Les variables, les objets, les classes et les méthodes sont nommés en Anglais.
+
+Les commentaires doivent être écrit de préférence en Anglais. Néanmoins, le Français sera toléré (il vaut mieux écrire quelque chose de compréhensible en Français qu'un truc qui ne veut rien dire en Anglais).
+
+La documentation, elle, est écrite en Français.
+
+\subsection{Forme du code}
+
+\subsubsection{Indentation}
+
+L'indentation doit être effectuée à coup de \textbf{4 espaces}. Ne \textbf{pas} utiliser de tabulation dans le code !
+
+\subsubsection{Opérateurs}
+
+Les opérations utilisant des opérateurs doivent être espacées. De même pour les opérateurs de comparaisons…
+Exemple : \verb!toto = tata + titi;! et non pas \verb!toto=tata+titi;! 
+
+\subsubsection{Blocs}
+
+Les blocs se présentent de la forme suivante (exemple avec un if) :
+\begin{verbatim}
+if (toto == tata) {
+    tutu();
+}
+\end{verbatim}
+
+\textbf{Aucune} autre forme de présentation n'est acceptée ! Pas de crochet ouvrant à la ligne, par exemple.
+
+\begin{note}
+  Les blocs if, for… contenant une seule instruction doivent \textbf{quand même} posséder des accolades. Ceci permet d'ajouter plus simplement des instructions si nécessaire, et le code n'en est que plus lisible, on voit bien la hiérarchie des blocs qui se ferment.
+\end{note}
+
+\subsubsection{Instructions ternaires}
+
+Les instructions ternaires sont autorisées. En cas d'écriture complexe (plusieurs instructions imbriquées), un commentaire peut-être laissé en fin de ligne. 
+Exemple : 
+\begin{verbatim}
+toto = (tata == 0)?1:10; // Si tata == 0, toto = 1, sinon, toto = 10
+                         // mais ce commentaire n'est vraiment pas utile.
+\end{verbatim}
+
+\subsection{Contenu du code}
+
+\subsubsection{Classes et Méthodes}
+
+Afin de respecter les principes d'encapsulation, les attributs des classes doivent autant que possible être protected ou private. Pour y accéder, les classes proposent des accesseurs (setter et getter).
+
+\subsubsection{Constructeurs et Destructeurs}
+
+Toute classe doit posséder un destructeur, même s'il est vide.
+
+\subsubsection{Magic Numbers}
+
+Les « magic numbers » sont à éviter. Par exemple : \verb+if (toto == 4) { }+. D'où sort ce `4' ? C'est un « magic number ». Il vaudra donc mieux le remplacer par une constante globale, voire par un \#define, pour savoir à quoi il correspond et pouvoir paramétrer la classe simplement.
+Exemple plus lisible :
+\begin{verbatim}
+#define MAX_THREADS 4
+// blabla
+if (toto == MAX_THREADS) { } 
+\end{verbatim}
+
+\begin{note}
+Il peut bien sûr y avoir des exceptions. Les valeurs de 0 et de 1 sont parfaitement tolérées, par exemple.
+\end{note}
+
+\subsubsection{Mot clé const}
+
+\begin{itemize}
+  \item Si une méthode ne modifie pas l'objet lorsqu'elle est appelée, elle \textbf{doit} être déclarée \verb+const+.
+  \item Si un argument d'une méthode n'est pas modifié dans la méthode, il \textbf{doit} être déclaré \verb+const+.
+  \item Si un argument d'une méthode est succeptible d'être un gros objet, il devrait généralement être passé par référence constante, et non par copie (exemple : \verb+void setName(string const& name);+).
+\end{itemize}
+
+Ces règles permettent d'améliorer significativement la qualité du programme en fournissant des informations importantes au compilateur, mais aussi aux développeurs.
+
+\subsection{Nomage}
+
+Les noms sont tous donnés en anglais, donc la phrase qui suit ne devrait pas être précisée, mais on ne sait jamais… 
+\textbf{Jamais}, sous \textbf{aucun} prétexte, d'accent dans le code !
+
+Les variables, objets, classes, fonctions, méthodes… sont nommées de la manière suivante :
+
+\begin{itemize}
+  \item \verb+ClassName+
+  \item \verb+methodName+
+  \item \verb+objectName+ ou \verb+objectname+ (suivant le cas, par exemple, filename est plus joli que fileName).
+  \item \verb+CONSTANT_NAME+
+  \item \verb+setAttribute+
+  \item \verb+getAttribute+
+  \item \verb+isAttributed+ (exemple : si l'attribut "enable" est un booléen, \verb+isEnabled()+)
+\end{itemize}
+
+\subsubsection{Fichiers}
+
+Les fichiers sont nommés en minuscules, sans espace ni underscore, et se terminent par .h, .cpp.
+
+Par exemple, la classe \verb+ClassName+ sera donc contenue dans les fichiers \verb+classname.h+ et \verb+classname.cpp+. 
+
+\subsection{Commentaires}
+
+Il y a deux types de commentaires.
+
+\subsubsection{Doxygen}
+
+Chaque classe, chaque méthode et chaque slot doivent être documentés à l'aide de Doxygen. 
+
+\subsubsection{Gotcha Keywords}
+
+Le code doit, à chaque fois que c'est nécessaire, contenir des « Gotcha Keywords ». Ces commentaires sont de la forme :
+\begin{verbatim}
+// :KEYWORD:pseudo:date: commentaire
+// Suite du commentaire, si nécessaire
+\end{verbatim}
+
+\begin{description}
+  \item[KEYWORD] peut être un mot clé dans la liste suivante : DOC, TRICKY, COMMENT, TODO, KLUDGE, WARNING, DEBUG, BUG, DEBUG
+  \item[pseudo] est le pseudo de l'utilisateur qui pose le commentaire
+  \item[date] \textbf{doit impérativement} être écrite de la forme YYMMDD. Par exemple, pour le 31 février 2012, la date sera 120231
+\end{description}
+
+Exemple de gotcha : 
+\begin{verbatim}
+// :TODO:cbadiola:130115: We must send the report! If we don't, we will get punished!
+\end{verbatim}
+
+Un script python\footnote{\url{http://git.meowstars.org/cgit.cgi/gotcha}} permet de sortir la synthèse des GOTCHA de tout un répertoire, très pratique lors de la phase de développement pour avoir une vision globale. N'hésitez donc pas à user et abuser de ce type de commentaires, et choisissant autant que possible le bon mot clé. 
