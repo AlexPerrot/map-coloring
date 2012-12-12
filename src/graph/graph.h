@@ -20,10 +20,21 @@
 		color vertexColor;
  };
  
-typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS, Vertex, boost::no_property> graph;
+typedef boost::adjacency_list<
+				boost::vecS,
+				boost::vecS,
+				boost::undirectedS,
+				Vertex,
+				boost::no_property
+			> graph;
+typedef boost::graph_traits<graph>::vertex_descriptor vertex;
 
 class Graph {
 	public:
 		Graph();
-		Vertex * addVertex();
+		vertex addVertex();
+		void addEdge(vertex source, vertex target);
+		Vertex& getVertex(vertex v);
+	private:
+		graph boostDeleg;
 };

@@ -4,8 +4,10 @@
 
 int main() {
 	Graph g;
-	Vertex* v = g.addVertex();
-	std::cout << "Vertex color : " << v->getColor() << std::endl;
-	v->setColor(1);
-	std::cout << "Vertex color : " << v->getColor() << std::endl;
+	vertex v = g.addVertex();
+	Vertex& v1 = g.getVertex(v);
+	std::cout << "Vertex color : " << v1.getColor() << std::endl;
+	v1.setColor(1);
+	std::cout << "Vertex color : " << v1.getColor() << std::endl;
+	std::cout << "Color from graph : " << g.getVertex(v).getColor() << std::endl;
 }
