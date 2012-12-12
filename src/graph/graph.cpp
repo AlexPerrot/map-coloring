@@ -30,24 +30,24 @@ void Graph::addEdge(vertex source,
 }
 
 VertexIterator::VertexIterator(vertexIterator begin, vertexIterator end)
- : _current(begin), _end(end) {
+ : current(begin), end(end) {
 	
 }
 
 VertexIterator::VertexIterator(std::pair<vertexIterator,vertexIterator> iterPair)
- : _current(iterPair.first), _end(iterPair.second) {
+ : current(iterPair.first), end(iterPair.second) {
 	 
  }
 
 bool VertexIterator::hasNext() {
-	return _current < _end;
+	return current < end;
 }
 
 void VertexIterator::moveNext() {
 	if (this->hasNext())
-		_current++;
+		current++;
 }
 
-vertex VertexIterator::current() {
-	return *_current;
+vertex VertexIterator::getCurrent() {
+	return *current;
 }

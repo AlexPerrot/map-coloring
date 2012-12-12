@@ -36,11 +36,11 @@ class VertexIterator {
 		VertexIterator(vertexIterator begin, vertexIterator end);
 		VertexIterator(std::pair<vertexIterator, vertexIterator> iterPair);
 		bool hasNext();
-		vertex current();
+		vertex getCurrent();
 		void moveNext();
 	private:
-		vertexIterator _current;
-		vertexIterator _end;
+		vertexIterator current;
+		vertexIterator end;
 };
 
 class Graph {
