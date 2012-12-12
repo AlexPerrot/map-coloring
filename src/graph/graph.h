@@ -1,3 +1,5 @@
+#include <boost/graph/adjacency_list.hpp>
+
 /*
  * Ces classes sont une surcouche aux graphes boost
  * Les fonctionnalités attendues sont :
@@ -18,6 +20,8 @@
 		color vertexColor;
  };
  
+typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS, Vertex, boost::no_property> graph;
+
 class Graph {
 	public:
 		Graph();
