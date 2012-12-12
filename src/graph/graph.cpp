@@ -1,14 +1,14 @@
 #include "graph.h"
 
-Vertex::Vertex() : vertexColor(-1) {
+VertexProperties::VertexProperties() : vertexColor(-1) {
 	
 }
 
-color Vertex::getColor() {
+color VertexProperties::getColor() {
 	return vertexColor;
 }
 
-void Vertex::setColor(color newColor) {
+void VertexProperties::setColor(color newColor) {
 	vertexColor = newColor;
 }
 
@@ -20,7 +20,7 @@ vertex Graph::addVertex() {
 	return boost::add_vertex(boostDeleg);
 }
 
-Vertex& Graph::getVertex(vertex v) {
+VertexProperties& Graph::getVertexProperties(vertex v) {
 	return boostDeleg[v];
 }
 

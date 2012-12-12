@@ -11,9 +11,9 @@
  
  typedef int color;
  
- class Vertex {
+ class VertexProperties {
 	public:
-		Vertex();
+		VertexProperties();
 		color getColor();
 		void setColor(color newColor);
 	private:
@@ -24,9 +24,10 @@ typedef boost::adjacency_list<
 				boost::vecS,
 				boost::vecS,
 				boost::undirectedS,
-				Vertex,
+				VertexProperties,
 				boost::no_property
 			> graph;
+			
 typedef boost::graph_traits<graph>::vertex_descriptor vertex;
 
 class Graph {
@@ -34,7 +35,7 @@ class Graph {
 		Graph();
 		vertex addVertex();
 		void addEdge(vertex source, vertex target);
-		Vertex& getVertex(vertex v);
+		VertexProperties& getVertexProperties(vertex v);
 	private:
 		graph boostDeleg;
 };
