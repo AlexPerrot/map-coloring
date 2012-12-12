@@ -28,3 +28,26 @@ void Graph::addEdge(vertex source,
 			vertex target) {
 	boost::add_edge(source, target, boostDeleg);
 }
+
+VertexIterator::VertexIterator(vertexIterator begin, vertexIterator end)
+ : _current(begin), _end(end) {
+	
+}
+
+VertexIterator::VertexIterator(std::pair<vertexIterator,vertexIterator> iterPair)
+ : _current(iterPair.first), _end(iterPair.second) {
+	 
+ }
+
+bool VertexIterator::hasNext() {
+	return _current < _end;
+}
+
+void VertexIterator::moveNext() {
+	if (this->hasNext())
+		_current++;
+}
+
+vertex VertexIterator::current() {
+	return *_current;
+}
