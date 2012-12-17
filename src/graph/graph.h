@@ -49,6 +49,8 @@ class Graph {
 		vertex addVertex();
 		void addEdge(vertex source, vertex target);
 		VertexProperties& getVertexProperties(vertex v);
+		VertexIterator getVertices();
+		VertexIterator getNeighbours(vertex v);
 	private:
 		graph boostDeleg;
 };

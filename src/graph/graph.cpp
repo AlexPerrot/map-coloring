@@ -29,6 +29,17 @@ void Graph::addEdge(vertex source,
 	boost::add_edge(source, target, boostDeleg);
 }
 
+VertexIterator Graph::getVertices() {
+	vertexIterator begin, end;
+	tie(begin, end) = vertices(boostDeleg);
+	return VertexIterator(begin, end);
+}
+
+VertexIterator Graph::getNeighbours(vertex v) {
+	//utiliser adjacent_vertices, mais il renvoit des adjacency_iterator
+	//return VertexIterator(0,0);
+}
+
 VertexIterator::VertexIterator(vertexIterator begin, vertexIterator end)
  : current(begin), end(end) {
 	
@@ -51,3 +62,4 @@ void VertexIterator::moveNext() {
 vertex VertexIterator::getCurrent() {
 	return *current;
 }
+
