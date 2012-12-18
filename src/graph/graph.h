@@ -30,6 +30,7 @@ typedef boost::adjacency_list<
 			
 typedef boost::graph_traits<graph>::vertex_descriptor vertex;
 typedef boost::graph_traits<graph>::vertex_iterator vertexIterator;
+typedef boost::graph_traits<graph>::adjacency_iterator adjIterator;
 
 class Iterator {
 	public:
@@ -50,14 +51,26 @@ class VertexIterator : public Iterator {
 		vertexIterator end;
 };
 
+class AdjacencyIterator : public Iterator {
+	public:
+		AdjacencyIterator(adjIterator begin, adjIterator end);
+		AdjacencyIterator(std::pair<adjIterator, adjIterator> iterPair);
+		bool hasNext();
+		vertex getCurrent();
+		void moveNext();
+	private:
+		adjIterator current;
+		adjIterator end;
+};
+
 class Graph {
 	public:
 		Graph();
 		vertex addVertex();
 		void addEdge(vertex source, vertex target);
 		VertexProperties& getVertexProperties(vertex v);
-		Iterator getVertices();
-		Iterator getNeighbours(vertex v);
+		VertexIterator getVertices();
+		AdjacencyIterator getNeighbours(vertex v);
 	private:
 		graph boostDeleg;
 };

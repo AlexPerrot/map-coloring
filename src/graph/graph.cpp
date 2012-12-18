@@ -35,16 +35,12 @@ void Graph::addEdge(vertex source,
 	boost::add_edge(source, target, boostDeleg);
 }
 
-Iterator Graph::getVertices() {
-	vertexIterator begin, end;
-	tie(begin, end) = vertices(boostDeleg);
-	VertexIterator it = VertexIterator(begin, end);
-	return it;
+VertexIterator Graph::getVertices() {
+	return VertexIterator(boost::vertices(boostDeleg));
 }
 
-Iterator Graph::getNeighbours(vertex v) {
-	//utiliser adjacent_vertices, mais il renvoit des adjacency_iterator
-	//return VertexIterator(0,0);
+AdjacencyIterator Graph::getNeighbours(vertex v) {
+	return AdjacencyIterator(boost::adjacent_vertices(v, boostDeleg));
 }
 
 
@@ -73,3 +69,27 @@ vertex VertexIterator::getCurrent() {
 	return *current;
 }
 
+/****** AjacencyIterator Implementation ******/
+
+AdjacencyIterator::AdjacencyIterator(adjIterator begin, adjIterator end)
+ : current(begin), end(end) {
+
+}
+
+AdjacencyIterator::AdjacencyIterator(std::pair<adjIterator,adjIterator> iterPair)
+ : current(iterPair.first), end(iterPair.second) {
+	 
+}
+
+bool AdjacencyIterator::hasNext() {
+	return current < end;
+}
+
+void AdjacencyIterator::moveNext() {
+	if (this->hasNext())
+		current++;
+}
+
+vertex AdjacencyIterator::getCurrent() {
+	return *current;
+}
