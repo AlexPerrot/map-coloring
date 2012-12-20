@@ -1,33 +1,19 @@
 #include <iostream>
 
 #include "graph/graph.h"
+#include "game/game.h"
 
 int main() {
 	Graph g;
-	vertex v = g.addVertex();
-	VertexProperties& v1 = g.getVertexProperties(v);
-	std::cout << "Vertex color : " << v1.getColor() << std::endl;
-	v1.setColor(1);
-	std::cout << "Vertex color : " << v1.getColor() << std::endl;
-	std::cout << "Color from graph : " << g.getVertexProperties(v).getColor() << std::endl;
-	vertex v2;
-	for (int i=0 ; i< 6 ; i++)
-		v2=g.addVertex();
-	VertexIterator allVertices = g.getVertices();
-	while (allVertices.hasNext()) {
-		vertex curr = allVertices.getCurrent();
-		std::cout << g.getVertexProperties(curr).getColor() << std::endl;
-		allVertices.moveNext();
-	}
-	
-	std::cout << "Test voisins :" << std::endl;
-	
-	g.addEdge(v, v2);
-	
-	AdjacencyIterator neighbours = g.getNeighbours(v);
-	while(neighbours.hasNext()) {
-		vertex curr = neighbours.getCurrent();
-		std::cout << g.getVertexProperties(curr).getColor() << std::endl;
-		neighbours.moveNext();
-	}
+	for(int i=0 ; i<6 ; i++)
+		g.addVertex();
+	g.addEdge(g.getVertex(1), g.getVertex(2));
+	g.addEdge(g.getVertex(1), g.getVertex(5));
+	g.addEdge(g.getVertex(2), g.getVertex(3));
+	g.addEdge(g.getVertex(2), g.getVertex(5));
+	g.addEdge(g.getVertex(3), g.getVertex(4));
+	g.addEdge(g.getVertex(4), g.getVertex(5));
+	g.addEdge(g.getVertex(0), g.getVertex(5));
+
+	MapGame game(g, 4);
 }

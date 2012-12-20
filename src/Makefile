@@ -3,7 +3,7 @@ CFLAGS = -Wall -O3
 EXEC_NAME = map_coloring
 INCLUDES = 
 LIBS =
-OBJ_FILES = main.o graph/graph.o
+OBJ_FILES = main.o graph/graph.o game/game.o
 
 all : $(EXEC_NAME)
 
