@@ -1,3 +1,6 @@
+#ifndef GRAPH_H
+#define GRAPH_H
+
 #include <boost/graph/adjacency_list.hpp>
 
 /*
@@ -75,3 +78,5 @@ class Graph {
 	private:
 		graph boostDeleg;
 };
+
+#endif
