@@ -26,6 +26,10 @@ vertex Graph::addVertex() {
 	return boost::add_vertex(boostDeleg);
 }
 
+vertex Graph::getVertex(int n) {
+	return boost::vertex(n, boostDeleg);
+}
+
 VertexProperties& Graph::getVertexProperties(vertex v) {
 	return boostDeleg[v];
 }
