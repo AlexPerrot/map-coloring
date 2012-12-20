@@ -9,6 +9,8 @@ class MapGame {
 		Graph& getGraph();
 		color getFirstUnusedColor();
 		int getMaxColors();
+		bool isFinished();
+		bool canContinue();
 	private:
 		Graph& graph;
 		int maxColors;

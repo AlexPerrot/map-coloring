@@ -72,6 +72,7 @@ class Graph {
 		vertex addVertex();
 		void addEdge(vertex source, vertex target);
 		vertex getVertex(int n);
+		int getNbVertices();
 		VertexProperties& getVertexProperties(vertex v);
 		VertexIterator getVertices();
 		AdjacencyIterator getNeighbours(vertex v);

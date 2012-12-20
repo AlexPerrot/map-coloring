@@ -30,6 +30,10 @@ vertex Graph::getVertex(int n) {
 	return boost::vertex(n, boostDeleg);
 }
 
+int Graph::getNbVertices() {
+	return boost::num_vertices(boostDeleg);
+}
+
 VertexProperties& Graph::getVertexProperties(vertex v) {
 	return boostDeleg[v];
 }

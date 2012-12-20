@@ -16,3 +16,18 @@ color MapGame::getFirstUnusedColor() {
 int MapGame::getMaxColors() {
 	return maxColors;
 }
+
+bool MapGame::isFinished() {
+	VertexIterator it = graph.getVertices();
+	while(it.hasNext()) {
+		vertex curr = it.getCurrent();
+		if (graph.getVertexProperties(curr).getColor() == -1)
+			return false;
+		it.moveNext();
+	}
+	return true;
+}
+
+bool MapGame::canContinue() {
+	return !isFinished();
+}

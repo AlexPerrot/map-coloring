@@ -16,4 +16,8 @@ int main() {
 	g.addEdge(g.getVertex(0), g.getVertex(5));
 
 	MapGame game(g, 4);
+
+	std::cout << "The graph has " << game.getGraph().getNbVertices()
+		 << " vertices"  << std::endl;
+	std::cout << (game.isFinished()?"finished":"not finished") << std::endl;
 }
