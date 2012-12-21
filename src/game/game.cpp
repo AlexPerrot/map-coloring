@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <iostream>
 
 #include "game.h"
 
@@ -36,6 +37,17 @@ bool MapGame::canContinue() {
 	return !isFinished();
 }
 
+void MapGame::play(Player& alice, Player& bob) {
+	while (!isFinished() && canContinue()) {
+		alice.play();
+		bob.play();
+	}
+	if (isFinished())
+		std::cout << "alice a gagné" << std::endl;
+	else
+		std::cout << "bob a gagné" << std::endl;
+}
+
 /****** SelectionAlgorithm ******/
 SelectionAlgorithm::SelectionAlgorithm(MapGame& game)
 	: game(game) {
@@ -53,8 +65,8 @@ color SelectionAlgorithm::selectColor(vertex v) {
 }
 
 /****** Player ******/
-Player::Player(SelectionAlgorithm& algo)
-	: algo(algo) {
+Player::Player(SelectionAlgorithm& algo, MapGame& game)
+	: algo(algo), game(game) {
 
 }
 
@@ -62,4 +74,5 @@ void Player::play() {
 	vertex v = algo.selectVertex();
 	color c = algo.selectColor(v);
 	game.getGraph().getVertexProperties(v).setColor(c);
+	std::cout << "coloring vertex " << v << " with color " << c << std::endl;
 }

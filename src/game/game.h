@@ -3,6 +3,8 @@
 
 #include "../graph/graph.h"
 
+class Player;
+
 class MapGame {
 	public:
 		MapGame(Graph& g, int maxColors);
@@ -11,6 +13,7 @@ class MapGame {
 		int getMaxColors();
 		bool isFinished();
 		bool canContinue();
+		void play(Player& alice, Player& bob);
 	private:
 		Graph& graph;
 		int maxColors;
@@ -28,10 +31,11 @@ private:
 
 class Player {
 public:
-	Player(SelectionAlgorithm& algo);
+	Player(SelectionAlgorithm& algo, MapGame& game);
 	void play();
 private:
 	SelectionAlgorithm& algo;
+	MapGame& game;
 };
 
 #endif

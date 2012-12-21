@@ -1,9 +1,13 @@
 #include <iostream>
+#include <cstdlib>
 
 #include "graph/graph.h"
 #include "game/game.h"
 
 int main() {
+
+	srand(time(0));
+
 	Graph g;
 	for(int i=0 ; i<6 ; i++)
 		g.addVertex();
@@ -15,9 +19,14 @@ int main() {
 	g.addEdge(g.getVertex(4), g.getVertex(5));
 	g.addEdge(g.getVertex(0), g.getVertex(5));
 
-	MapGame game(g, 4);
+	MapGame game(g, 7);
 
 	std::cout << "The graph has " << game.getGraph().getNbVertices()
 		 << " vertices"  << std::endl;
 	std::cout << (game.isFinished()?"finished":"not finished") << std::endl;
+
+	SelectionAlgorithm algoAlice(game), algoBob(game);
+	Player alice(algoAlice, game);
+	Player bob(algoBob, game);
+	game.play(alice, bob);
 }
