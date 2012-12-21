@@ -17,4 +17,21 @@ class MapGame {
 		color firstUnusedColor;
 };
 
+class SelectionAlgorithm {
+public:
+	SelectionAlgorithm(MapGame& game);
+	virtual vertex selectVertex();
+	virtual color selectColor(vertex v);
+private:
+	MapGame& game;
+};
+
+class Player {
+public:
+	Player(SelectionAlgorithm& algo);
+	void play();
+private:
+	SelectionAlgorithm& algo;
+};
+
 #endif
