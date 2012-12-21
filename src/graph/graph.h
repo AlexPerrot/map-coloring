@@ -19,6 +19,7 @@
 		VertexProperties();
 		color getColor();
 		void setColor(color newColor);
+		bool isColored();
 	private:
 		color vertexColor;
  };

@@ -15,6 +15,10 @@ void VertexProperties::setColor(color newColor) {
 	vertexColor = newColor;
 }
 
+bool VertexProperties::isColored() {
+	return vertexColor != -1;
+}
+
 
 /****** Graph Implementation ******/
 

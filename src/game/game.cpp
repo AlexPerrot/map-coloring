@@ -40,7 +40,8 @@ bool MapGame::canContinue() {
 void MapGame::play(Player& alice, Player& bob) {
 	while (!isFinished() && canContinue()) {
 		alice.play();
-		bob.play();
+		if (!isFinished() && canContinue())
+			bob.play();
 	}
 	if (isFinished())
 		std::cout << "alice a gagné" << std::endl;
@@ -55,9 +56,13 @@ SelectionAlgorithm::SelectionAlgorithm(MapGame& game)
 }
 
 vertex SelectionAlgorithm::selectVertex() {
-	int nbVertices = game.getGraph().getNbVertices();
-	int r = rand() % nbVertices;
-	return game.getGraph().getVertex(r);
+	vertex v;
+	do {
+		int nbVertices = game.getGraph().getNbVertices();
+		int r = rand() % nbVertices;
+		v = game.getGraph().getVertex(r);
+	} while (game.getGraph().getVertexProperties(v).isColored());
+	return v;
 }
 
 color SelectionAlgorithm::selectColor(vertex v) {
