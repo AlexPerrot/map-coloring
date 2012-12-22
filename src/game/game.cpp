@@ -34,7 +34,44 @@ bool MapGame::isFinished() {
 }
 
 bool MapGame::canContinue() {
-	return !isFinished();
+	//tableau d'existence des couleurs dans le voisinage
+	bool * existingColors = new bool[maxColors];
+
+	//parcours de tous les sommets du graphe
+	VertexIterator it = graph.getVertices();
+	while (it.hasNext()) {
+		vertex curr = it.getCurrent();
+
+		//remise à zero des couleurs
+		for (int i=0 ; i<maxColors ; i++)
+			existingColors[i] = false;
+
+		//parcours des voisins
+		AdjacencyIterator neigh = graph.getNeighbours(curr);
+		while(neigh.hasNext()) {
+			color c = graph.getVertexProperties(neigh.getCurrent()).getColor();
+			//ajout des couleurs existantes
+			if (c>=0)
+				existingColors[c] = true;
+			neigh.moveNext();
+		}
+
+		//verification du nombre de couleurs
+		bool seesEveryColor = true;
+		for (int i=0 ; i<maxColors ; i++)
+			seesEveryColor &= existingColors[i];
+
+		//le sommet a toutes les couleurs voisines
+		if (seesEveryColor) {
+			delete[] existingColors;
+			return false;
+		}
+
+		it.moveNext();
+	}
+
+	delete[] existingColors;
+	return true;
 }
 
 void MapGame::play(Player& alice, Player& bob) {
@@ -66,7 +103,10 @@ vertex SelectionAlgorithm::selectVertex() {
 }
 
 color SelectionAlgorithm::selectColor(vertex v) {
-	return game.getFirstUnusedColor();
+	color c = game.getFirstUnusedColor();
+	if (c>=game.getMaxColors())
+		c = rand()%game.getMaxColors();
+	return c;
 }
 
 /****** Player ******/

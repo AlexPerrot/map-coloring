@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Wall -O3
+CFLAGS = -Wall -O3 -g
 EXEC_NAME = map_coloring
 INCLUDES = 
 LIBS =
