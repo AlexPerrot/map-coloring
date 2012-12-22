@@ -103,9 +103,25 @@ vertex SelectionAlgorithm::selectVertex() {
 }
 
 color SelectionAlgorithm::selectColor(vertex v) {
+	int maxColors = game.getMaxColors();
+	bool * existingColors = new bool[maxColors];
+	for (int i=0 ; i<maxColors ; i++)
+			existingColors[i] = false;
+
+	AdjacencyIterator neigh = game.getGraph().getNeighbours(v);
+	while(neigh.hasNext()) {
+			color c = game.getGraph().getVertexProperties(neigh.getCurrent()).getColor();
+			//ajout des couleurs existantes
+			if (c>=0)
+				existingColors[c] = true;
+			neigh.moveNext();
+	}
 	color c = game.getFirstUnusedColor();
-	if (c>=game.getMaxColors())
+	if (c>=game.getMaxColors() )
 		c = rand()%game.getMaxColors();
+	while(existingColors[c])
+		c = rand()%game.getMaxColors();
+	delete[] existingColors;
 	return c;
 }
 
