@@ -3,7 +3,7 @@
 
 /****** VertexProperties Implementation ******/
 
-VertexProperties::VertexProperties() : vertexColor(-1) {
+VertexProperties::VertexProperties() : vertexColor(-1), colored(false) {
 	
 }
 
@@ -13,10 +13,16 @@ color VertexProperties::getColor() {
 
 void VertexProperties::setColor(color newColor) {
 	vertexColor = newColor;
+	colored = true;
+}
+
+void VertexProperties::uncolor() {
+	vertexColor = -1;
+	colored = false;
 }
 
 bool VertexProperties::isColored() {
-	return vertexColor != -1;
+	return colored;
 }
 
 

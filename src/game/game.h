@@ -25,7 +25,7 @@ class MapGame {
 
 class ColoringMove {
 public:
-	ColoringMove(Graph& graph, color c, vertex v);
+	ColoringMove(Graph& graph, vertex v, color c);
 	color getColor();
 	vertex getVertex();
 	Graph& getGraph();
@@ -42,17 +42,17 @@ public:
 	SelectionAlgorithm(MapGame& game);
 	virtual vertex selectVertex();
 	virtual color selectColor(vertex v);
+	ColoringMove selectMove();
 private:
 	MapGame& game;
 };
 
 class Player {
 public:
-	Player(SelectionAlgorithm& algo, MapGame& game);
+	Player(SelectionAlgorithm& algo);
 	void play();
 private:
 	SelectionAlgorithm& algo;
-	MapGame& game;
 };
 
 #endif

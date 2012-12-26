@@ -26,7 +26,7 @@ bool MapGame::isFinished() {
 	VertexIterator it = graph.getVertices();
 	while(it.hasNext()) {
 		vertex curr = it.getCurrent();
-		if (graph.getVertexProperties(curr).getColor() == -1)
+		if (!graph.getVertexProperties(curr).isColored())
 			return false;
 		it.moveNext();
 	}
@@ -98,14 +98,14 @@ void MapGame::reset() {
 	VertexIterator it = graph.getVertices();
 	while (it.hasNext()) {
 		vertex curr = it.getCurrent();
-		graph.getVertexProperties(curr).setColor(-1);
+		graph.getVertexProperties(curr).uncolor();
 		it.moveNext();
 	}
 }
 
 /****** ColoringMove ******/
-ColoringMove::ColoringMove(Graph& graph, color c, vertex v)
-: g(graph), c(c), v(v) {
+ColoringMove::ColoringMove(Graph& graph, vertex v, color c)
+: c(c), v(v), g(graph) {
 
 }
 
@@ -126,7 +126,7 @@ void ColoringMove::play() {
 }
 
 void ColoringMove::undo() {
-	g.getVertexProperties(v).setColor(-1);
+	g.getVertexProperties(v).uncolor();
 }
 
 /****** SelectionAlgorithm ******/
@@ -156,15 +156,24 @@ color SelectionAlgorithm::selectColor(vertex v) {
 	return c;
 }
 
+ColoringMove SelectionAlgorithm::selectMove() {
+	vertex v = selectVertex();
+	Graph& g = game.getGraph();
+	color c = selectColor(v);
+	return ColoringMove(g, v, c);
+}
+
 /****** Player ******/
-Player::Player(SelectionAlgorithm& algo, MapGame& game)
-	: algo(algo), game(game) {
+Player::Player(SelectionAlgorithm& algo)
+	: algo(algo) {
 
 }
 
 void Player::play() {
-	vertex v = algo.selectVertex();
-	color c = algo.selectColor(v);
-	game.getGraph().getVertexProperties(v).setColor(c);
-	std::cout << "coloring vertex " << v << " with color " << c << std::endl;
+	ColoringMove move = algo.selectMove();
+	
+	std::cout << "coloring vertex " << move.getVertex() <<
+	 " with color " << move.getColor() << std::endl;
+
+	 move.play();
 }

@@ -19,9 +19,11 @@
 		VertexProperties();
 		color getColor();
 		void setColor(color newColor);
+		void uncolor();
 		bool isColored();
 	private:
 		color vertexColor;
+		bool colored;
  };
  
 typedef boost::adjacency_list<

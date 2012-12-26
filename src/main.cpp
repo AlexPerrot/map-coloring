@@ -30,8 +30,8 @@ int main(int argc, char* argv[]) {
 	std::cout << (game.isFinished()?"finished":"not finished") << std::endl;
 
 	SelectionAlgorithm algoAlice(game), algoBob(game);
-	Player alice(algoAlice, game);
-	Player bob(algoBob, game);
+	Player alice(algoAlice);
+	Player bob(algoBob);
 	int nbGagnees = 0;
 	for (int i = 0; i < nbParties; ++i)
 	{

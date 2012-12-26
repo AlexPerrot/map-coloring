@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Wall -O3 -g
+CFLAGS = -Wall -g
 EXEC_NAME = map_coloring
 INCLUDES = 
 LIBS =
@@ -12,6 +12,9 @@ clean :
 
 $(EXEC_NAME) : $(OBJ_FILES)
 	$(CC) -o $(EXEC_NAME) $(OBJ_FILES) $(LIBS)
+
+main.o : main.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) -o main.o -c main.cpp
 
 %.o: %.cpp %.h
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
