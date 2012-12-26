@@ -23,6 +23,20 @@ class MapGame {
 		bool seesEveryColor(vertex v);
 };
 
+class ColoringMove {
+public:
+	ColoringMove(Graph& graph, color c, vertex v);
+	color getColor();
+	vertex getVertex();
+	Graph& getGraph();
+	void play();
+	void undo();
+private:
+	color c;
+	vertex v;
+	Graph& g;
+};
+
 class SelectionAlgorithm {
 public:
 	SelectionAlgorithm(MapGame& game);

@@ -103,6 +103,32 @@ void MapGame::reset() {
 	}
 }
 
+/****** ColoringMove ******/
+ColoringMove::ColoringMove(Graph& graph, color c, vertex v)
+: g(graph), c(c), v(v) {
+
+}
+
+color ColoringMove::getColor() {
+	return c;
+}
+
+vertex ColoringMove::getVertex() {
+	return v;
+}
+
+Graph& ColoringMove::getGraph() {
+	return g;
+}
+
+void ColoringMove::play() {
+	g.getVertexProperties(v).setColor(c);
+}
+
+void ColoringMove::undo() {
+	g.getVertexProperties(v).setColor(-1);
+}
+
 /****** SelectionAlgorithm ******/
 SelectionAlgorithm::SelectionAlgorithm(MapGame& game)
 	: game(game) {
