@@ -4,9 +4,13 @@
 #include "graph/graph.h"
 #include "game/game.h"
 
-int main() {
+int main(int argc, char* argv[]) {
 
 	srand(time(0));
+
+	int nbParties = 10;
+	if (argc > 1)
+		nbParties = atoi(argv[1]);
 
 	Graph g;
 	for(int i=0 ; i<6 ; i++)
@@ -28,5 +32,13 @@ int main() {
 	SelectionAlgorithm algoAlice(game), algoBob(game);
 	Player alice(algoAlice, game);
 	Player bob(algoBob, game);
-	game.play(alice, bob);
+	int nbGagnees = 0;
+	for (int i = 0; i < nbParties; ++i)
+	{
+		if (game.play(alice, bob))
+			++nbGagnees;
+		game.reset();
+	}
+
+	std::cout << "alice a gagne " << nbGagnees << "/" << nbParties << " parties" << std::endl;
 }

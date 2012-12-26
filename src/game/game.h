@@ -1,5 +1,5 @@
 #ifndef GAME_H
-#define GAME_H value
+#define GAME_H
 
 #include "../graph/graph.h"
 
@@ -13,7 +13,8 @@ class MapGame {
 		int getMaxColors();
 		bool isFinished();
 		bool canContinue();
-		void play(Player& alice, Player& bob);
+		bool play(Player& alice, Player& bob);
+		void reset();
 	private:
 		Graph& graph;
 		int maxColors;

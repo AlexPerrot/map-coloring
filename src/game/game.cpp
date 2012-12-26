@@ -74,16 +74,22 @@ bool MapGame::canContinue() {
 	return true;
 }
 
-void MapGame::play(Player& alice, Player& bob) {
+bool MapGame::play(Player& alice, Player& bob) {
 	while (!isFinished() && canContinue()) {
 		alice.play();
 		if (!isFinished() && canContinue())
 			bob.play();
 	}
-	if (isFinished())
-		std::cout << "alice a gagné" << std::endl;
-	else
-		std::cout << "bob a gagné" << std::endl;
+	return isFinished();
+}
+
+void MapGame::reset() {
+	VertexIterator it = graph.getVertices();
+	while (it.hasNext()) {
+		vertex curr = it.getCurrent();
+		graph.getVertexProperties(curr).setColor(-1);
+		it.moveNext();
+	}
 }
 
 /****** SelectionAlgorithm ******/
