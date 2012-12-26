@@ -1,0 +1,4 @@
+graph {
+node [label="", shape=point, height=0.12, width=0.12];
+0--1; 0--4; 1--2--3--4;
+}
