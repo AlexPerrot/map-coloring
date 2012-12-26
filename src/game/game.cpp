@@ -33,46 +33,57 @@ bool MapGame::isFinished() {
 	return true;
 }
 
-bool MapGame::canContinue() {
-	//tableau d'existence des couleurs dans le voisinage
+bool* MapGame::getVisibleColors(vertex v) {
 	bool * existingColors = new bool[maxColors];
+	
+	//parcours des voisins
+	AdjacencyIterator neigh = graph.getNeighbours(v);
+	while(neigh.hasNext()) {
+		color c = graph.getVertexProperties(neigh.getCurrent()).getColor();
+		//ajout des couleurs existantes
+		if (c>=0)
+			existingColors[c] = true;
+		neigh.moveNext();
+	}
+
+	return existingColors;
+}
+
+bool MapGame::seesEveryColor(vertex v) {
+	//tableau d'existence des couleurs dans le voisinage
+	bool* existingColors = getVisibleColors(v);
+
+
+	//verification du nombre de couleurs
+	bool seesEveryColor = true;
+	for (int i=0 ; i<maxColors ; i++)
+		seesEveryColor &= existingColors[i];
+
+	//le sommet a toutes les couleurs voisines
+	if (seesEveryColor) {
+		delete[] existingColors;
+		return true;
+	}
+
+	delete[] existingColors;
+	return false;
+}
+
+bool MapGame::canContinue() {
 
 	//parcours de tous les sommets du graphe
 	VertexIterator it = graph.getVertices();
 	while (it.hasNext()) {
 		vertex curr = it.getCurrent();
 
-		//remise à zero des couleurs
-		for (int i=0 ; i<maxColors ; i++)
-			existingColors[i] = false;
-
-		//parcours des voisins
-		AdjacencyIterator neigh = graph.getNeighbours(curr);
-		while(neigh.hasNext()) {
-			color c = graph.getVertexProperties(neigh.getCurrent()).getColor();
-			//ajout des couleurs existantes
-			if (c>=0)
-				existingColors[c] = true;
-			neigh.moveNext();
-		}
-
-		//verification du nombre de couleurs
-		bool seesEveryColor = true;
-		for (int i=0 ; i<maxColors ; i++)
-			seesEveryColor &= existingColors[i];
-
-		//le sommet a toutes les couleurs voisines
-		if (seesEveryColor) {
-			delete[] existingColors;
-			return false;
-		}
+		if(seesEveryColor(curr))
+			return false;		
 
 		it.moveNext();
 	}
 
-	delete[] existingColors;
 	return true;
-}
+} 
 
 bool MapGame::play(Player& alice, Player& bob) {
 	while (!isFinished() && canContinue()) {
@@ -109,19 +120,7 @@ vertex SelectionAlgorithm::selectVertex() {
 }
 
 color SelectionAlgorithm::selectColor(vertex v) {
-	int maxColors = game.getMaxColors();
-	bool * existingColors = new bool[maxColors];
-	for (int i=0 ; i<maxColors ; i++)
-			existingColors[i] = false;
-
-	AdjacencyIterator neigh = game.getGraph().getNeighbours(v);
-	while(neigh.hasNext()) {
-			color c = game.getGraph().getVertexProperties(neigh.getCurrent()).getColor();
-			//ajout des couleurs existantes
-			if (c>=0)
-				existingColors[c] = true;
-			neigh.moveNext();
-	}
+	bool * existingColors = game.getVisibleColors(v);
 	color c = game.getFirstUnusedColor();
 	if (c>=game.getMaxColors() )
 		c = rand()%game.getMaxColors();

@@ -15,10 +15,12 @@ class MapGame {
 		bool canContinue();
 		bool play(Player& alice, Player& bob);
 		void reset();
+		bool* getVisibleColors(vertex v);
 	private:
 		Graph& graph;
 		int maxColors;
 		color firstUnusedColor;
+		bool seesEveryColor(vertex v);
 };
 
 class SelectionAlgorithm {
