@@ -7,18 +7,19 @@
 
 class MonteCarloNode {
 public:
-	MonteCarloNode(ColoringMove colorMove);
+	MonteCarloNode();
+	MonteCarloNode(ColoringMove* colorMove, MonteCarloNode* parent);
 	~MonteCarloNode();
 	MonteCarloNode* getParent();
 	std::vector<MonteCarloNode*> getChildren();
-	ColoringMove getMove();
+	ColoringMove* getMove();
 	int gamesPlayed;
 	int gamesWon;
 
 private:
 	MonteCarloNode* parent;
 	std::vector<MonteCarloNode*> children;
-	ColoringMove move;
+	ColoringMove* move;
 };
 
 #endif
