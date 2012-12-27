@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "../graph/graph.h"
+#include "move.h"
 
 class Player;
 
@@ -23,19 +24,7 @@ class MapGame {
 		bool seesEveryColor(vertex v);
 };
 
-class ColoringMove {
-public:
-	ColoringMove(Graph& graph, vertex v, color c);
-	color getColor();
-	vertex getVertex();
-	Graph& getGraph();
-	void play();
-	void undo();
-private:
-	color c;
-	vertex v;
-	Graph& g;
-};
+
 
 class SelectionAlgorithm {
 public:
