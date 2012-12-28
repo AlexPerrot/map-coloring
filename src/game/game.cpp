@@ -157,8 +157,8 @@ Player::Player(SelectionAlgorithm& algo)
 void Player::play(Graph& graph) {
 	ColoringMove move = algo.selectMove();
 	
-	std::cout << "coloring vertex " << move.getVertex() <<
-	 " with color " << move.getColor() << std::endl;
+	// std::cout << "coloring vertex " << move.getVertex() <<
+	//  " with color " << move.getColor() << std::endl;
 
 	 move.play(graph);
 }
