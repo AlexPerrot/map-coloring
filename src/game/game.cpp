@@ -87,9 +87,9 @@ bool MapGame::canContinue() {
 
 bool MapGame::play(Player& alice, Player& bob) {
 	while (!isFinished() && canContinue()) {
-		alice.play();
+		alice.play(graph);
 		if (!isFinished() && canContinue())
-			bob.play();
+			bob.play(graph);
 	}
 	return isFinished();
 }
@@ -133,9 +133,8 @@ color SelectionAlgorithm::selectColor(vertex v) {
 
 ColoringMove SelectionAlgorithm::selectMove() {
 	vertex v = selectVertex();
-	Graph& g = game.getGraph();
 	color c = selectColor(v);
-	return ColoringMove(g, v, c);
+	return ColoringMove(v, c);
 }
 
 /****** Player ******/
@@ -144,11 +143,11 @@ Player::Player(SelectionAlgorithm& algo)
 
 }
 
-void Player::play() {
+void Player::play(Graph& graph) {
 	ColoringMove move = algo.selectMove();
 	
 	std::cout << "coloring vertex " << move.getVertex() <<
 	 " with color " << move.getColor() << std::endl;
 
-	 move.play();
+	 move.play(graph);
 }

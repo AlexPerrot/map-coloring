@@ -5,16 +5,16 @@
 
 class ColoringMove {
 public:
-	ColoringMove(Graph& graph, vertex v, color c);
+	ColoringMove(vertex v, color c);
 	color getColor();
 	vertex getVertex();
-	Graph& getGraph();
-	void play();
-	void undo();
+	void play(Graph& graph);
+	void undo(Graph& graph);
 private:
 	color c;
 	vertex v;
-	Graph& g;
 };
+
+ColoringMove makeEmptyMove();
 
 #endif

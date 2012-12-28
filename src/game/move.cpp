@@ -1,8 +1,8 @@
 #include "move.h"
 
 /****** ColoringMove ******/
-ColoringMove::ColoringMove(Graph& graph, vertex v, color c)
-: c(c), v(v), g(graph) {
+ColoringMove::ColoringMove(vertex v, color c)
+: c(c), v(v) {
 
 }
 
@@ -14,14 +14,16 @@ vertex ColoringMove::getVertex() {
 	return v;
 }
 
-Graph& ColoringMove::getGraph() {
-	return g;
+void ColoringMove::play(Graph& graph) {
+	graph.getVertexProperties(v).setColor(c);
 }
 
-void ColoringMove::play() {
-	g.getVertexProperties(v).setColor(c);
+void ColoringMove::undo(Graph& graph) {
+	graph.getVertexProperties(v).uncolor();
 }
 
-void ColoringMove::undo() {
-	g.getVertexProperties(v).uncolor();
+ColoringMove makeEmptyMove() {
+	vertex v = 0;
+	color c = -1;
+	return ColoringMove(v, c);
 }

@@ -39,7 +39,7 @@ private:
 class Player {
 public:
 	Player(SelectionAlgorithm& algo);
-	void play();
+	void play(Graph& graph);
 private:
 	SelectionAlgorithm& algo;
 };
