@@ -24,7 +24,7 @@ class MapGame {
 		bool seesEveryColor(vertex v);
 };
 
-
+std::vector<ColoringMove> getPossibleMoves(MapGame* game);
 
 class SelectionAlgorithm {
 public:

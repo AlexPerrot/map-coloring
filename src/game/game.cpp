@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iostream>
+#include <vector>
 
 #include "game.h"
 
@@ -15,7 +16,16 @@ Graph& MapGame::getGraph() {
 }
 
 color MapGame::getFirstUnusedColor() {
-	return firstUnusedColor++;;
+	color max = -1;
+	VertexIterator vertices = graph.getVertices();
+	while(vertices.hasNext()) {
+		vertex curr = vertices.getCurrent();
+		color c = graph.getVertexProperties(curr).getColor();
+		if (c>max)
+			max = c;
+		vertices.moveNext();
+	}
+	return max+1;
 }
 
 int MapGame::getMaxColors() {
@@ -122,11 +132,12 @@ vertex SelectionAlgorithm::selectVertex() {
 
 color SelectionAlgorithm::selectColor(vertex v) {
 	bool * existingColors = game.getVisibleColors(v);
-	color c = game.getFirstUnusedColor();
-	if (c>=game.getMaxColors() )
-		c = rand()%game.getMaxColors();
+	color max = game.getFirstUnusedColor()+1;
+	if (max>game.getMaxColors())
+		max = game.getMaxColors();
+	color c = rand()%max;
 	while(existingColors[c])
-		c = rand()%game.getMaxColors();
+		c = rand()%max;
 	delete[] existingColors;
 	return c;
 }
@@ -150,4 +161,29 @@ void Player::play(Graph& graph) {
 	 " with color " << move.getColor() << std::endl;
 
 	 move.play(graph);
+}
+
+std::vector<ColoringMove> getPossibleMoves(MapGame* game) {
+	std::vector<ColoringMove> moves;
+	Graph& g = game->getGraph();
+	color fuc = game->getFirstUnusedColor();
+	VertexIterator vertices = g.getVertices();
+	while(vertices.hasNext()) {
+		vertex curr = vertices.getCurrent();
+
+		if(!g.getVertexProperties(curr).isColored()) {
+			bool* colors = game->getVisibleColors(curr);
+			for(int i=0 ; i<fuc ; ++i) {
+				if (!colors[i]) {
+					moves.push_back(ColoringMove(curr, i));
+				}
+			}
+			delete[] colors;
+		}
+		if (fuc < game->getMaxColors())
+			moves.push_back(ColoringMove(curr, fuc));
+
+		vertices.moveNext();
+	}
+	return moves;
 }
