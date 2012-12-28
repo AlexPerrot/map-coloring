@@ -3,6 +3,7 @@
 
 #include "graph/graph.h"
 #include "game/game.h"
+#include "monte_carlo/monte_carlo.h"
 
 int main(int argc, char* argv[]) {
 
@@ -41,4 +42,8 @@ int main(int argc, char* argv[]) {
 	}
 
 	std::cout << "alice a gagne " << nbGagnees << "/" << nbParties << " parties" << std::endl;
+
+	MonteCarloNode* mcTree = new MonteCarloNode(&game);
+	int nbWon = simulate(mcTree, nbParties);
+	std::cout << "Monte-Carlo a gagne " << nbWon << "/" << nbParties << " parties" << std::endl;
 }
