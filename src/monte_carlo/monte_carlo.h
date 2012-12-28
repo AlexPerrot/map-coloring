@@ -29,5 +29,5 @@ private:
 };
 
 int simulate(MonteCarloNode* node, int nbGames);
-MonteCarloNode* selectNode(std::vector<MonteCarloNode*> nodes);
+MonteCarloNode* selectNodeForSimu(std::vector<MonteCarloNode*> nodes);
 #endif

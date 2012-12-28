@@ -163,8 +163,8 @@ void Player::play(Graph& graph) {
 	 move.play(graph);
 }
 
-std::vector<ColoringMove> getPossibleMoves(MapGame* game) {
-	std::vector<ColoringMove> moves;
+std::vector<ColoringMove*> getPossibleMoves(MapGame* game) {
+	std::vector<ColoringMove*> moves;
 	Graph& g = game->getGraph();
 	color fuc = game->getFirstUnusedColor();
 	VertexIterator vertices = g.getVertices();
@@ -175,13 +175,13 @@ std::vector<ColoringMove> getPossibleMoves(MapGame* game) {
 			bool* colors = game->getVisibleColors(curr);
 			for(int i=0 ; i<fuc ; ++i) {
 				if (!colors[i]) {
-					moves.push_back(ColoringMove(curr, i));
+					moves.push_back(new ColoringMove(curr, i));
 				}
 			}
 			delete[] colors;
 		}
 		if (fuc < game->getMaxColors())
-			moves.push_back(ColoringMove(curr, fuc));
+			moves.push_back(new ColoringMove(curr, fuc));
 
 		vertices.moveNext();
 	}

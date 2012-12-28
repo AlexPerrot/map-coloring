@@ -43,6 +43,11 @@ MapGame* MonteCarloNode::getGame() {
 void MonteCarloNode::generateChildren() {
 	childrenGenerated = true;
 	// complete whith children generation
+	std::vector<ColoringMove*> moves = getPossibleMoves(game);
+	for(std::vector<ColoringMove*>::iterator it=moves.begin() ;
+	    it != moves.end() ; ++it) {
+		children.push_back(new MonteCarloNode(game, *it, this));
+	}
 }
 
 /****** Other functions ******/
@@ -53,7 +58,7 @@ int simulate(MonteCarloNode* node, int nbGames) {
 		nbWon = nbGames;
 	else if (game->canContinue()) {
 		for (int i=nbGames ; i>0 ; --i) {
-			MonteCarloNode* child = selectNode(node->getChildren());
+			MonteCarloNode* child = selectNodeForSimu(node->getChildren());
 			child->playMove();
 			nbWon += simulate(child, 1);
 			child->undoMove();
@@ -64,6 +69,6 @@ int simulate(MonteCarloNode* node, int nbGames) {
 	return nbWon;
 }
 
-MonteCarloNode* selectNode(std::vector<MonteCarloNode*> nodes) {
-	return nodes.front(); //dummy for testing purposes
+MonteCarloNode* selectNodeForSimu(std::vector<MonteCarloNode*> nodes) {
+	return nodes.at(rand()%nodes.size()); //dummy for testing purposes
 }
