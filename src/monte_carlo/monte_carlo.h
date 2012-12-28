@@ -4,22 +4,30 @@
 #include <vector>
 
 #include "../game/move.h"
+#include "../game/game.h"
 
 class MonteCarloNode {
 public:
-	MonteCarloNode();
-	MonteCarloNode(ColoringMove* colorMove, MonteCarloNode* parent);
+	MonteCarloNode(MapGame* game);
+	MonteCarloNode(MapGame* game, ColoringMove* colorMove, MonteCarloNode* parent);
 	~MonteCarloNode();
 	MonteCarloNode* getParent();
 	std::vector<MonteCarloNode*> getChildren();
-	ColoringMove* getMove();
+	void playMove();
+	void undoMove();
+	MapGame* getGame();
 	int gamesPlayed;
 	int gamesWon;
 
 private:
+	void generateChildren();
 	MonteCarloNode* parent;
 	std::vector<MonteCarloNode*> children;
 	ColoringMove* move;
+	bool childrenGenerated;
+	MapGame* game;
 };
 
+int simulate(MonteCarloNode* node, int nbGames);
+MonteCarloNode* selectNode(std::vector<MonteCarloNode*> nodes);
 #endif
