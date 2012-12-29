@@ -46,6 +46,9 @@ bool MapGame::isFinished() {
 bool* MapGame::getVisibleColors(vertex v) {
 	bool * existingColors = new bool[maxColors];
 	
+	for (int i=0 ; i<maxColors ; ++i)
+		existingColors[i] = false;
+
 	//parcours des voisins
 	AdjacencyIterator neigh = graph.getNeighbours(v);
 	while(neigh.hasNext()) {
