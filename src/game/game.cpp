@@ -182,9 +182,10 @@ std::vector<ColoringMove*> getPossibleMoves(MapGame* game) {
 				}
 			}
 			delete[] colors;
+			if (fuc < game->getMaxColors())
+				moves.push_back(new ColoringMove(curr, fuc));
 		}
-		if (fuc < game->getMaxColors())
-			moves.push_back(new ColoringMove(curr, fuc));
+	
 
 		vertices.moveNext();
 	}
