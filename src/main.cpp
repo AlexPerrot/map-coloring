@@ -46,4 +46,7 @@ int main(int argc, char* argv[]) {
 	MonteCarloNode* mcTree = new MonteCarloNode(&game);
 	int nbWon = simulate(mcTree, nbParties, UCB1);
 	std::cout << "Monte-Carlo a gagne " << nbWon << "/" << nbParties << " parties" << std::endl;
+
+	mcTree->deleteChildren();
+	delete mcTree;
 }
