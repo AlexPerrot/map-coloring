@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "monte_carlo.h"
 
 /****** MonteCarloNode ******/
@@ -22,7 +24,7 @@ MonteCarloNode* MonteCarloNode::getParent() {
 	return parent;
 }
 
-std::vector<MonteCarloNode*> MonteCarloNode::getChildren() {
+std::vector<MonteCarloNode*>& MonteCarloNode::getChildren() {
 	if (!childrenGenerated)
 		generateChildren();
 	return children;
@@ -51,14 +53,14 @@ void MonteCarloNode::generateChildren() {
 }
 
 /****** Other functions ******/
-int simulate(MonteCarloNode* node, int nbGames) {
+int simulate(MonteCarloNode* node, int nbGames, MCSelection selectNode) {
 	MapGame* game = node->getGame();
 	int nbWon = 0;
 	if (game->isFinished())
 		nbWon = nbGames;
 	else if (game->canContinue()) {
 		for (int i=nbGames ; i>0 ; --i) {
-			MonteCarloNode* child = selectNodeForSimu(node->getChildren());
+			MonteCarloNode* child = selectNode(node->getChildren());
 			child->playMove();
 			nbWon += simulate(child, 1);
 			child->undoMove();
@@ -69,6 +71,33 @@ int simulate(MonteCarloNode* node, int nbGames) {
 	return nbWon;
 }
 
-MonteCarloNode* selectNodeForSimu(std::vector<MonteCarloNode*> nodes) {
+MonteCarloNode* selectNodeEquiprob(std::vector<MonteCarloNode*>& nodes) {
 	return nodes.at(rand()%nodes.size()); //dummy for testing purposes
+}
+
+double getPossibleRatio(MonteCarloNode* node, int totalMoves) {
+	return (1.0*node->gamesWon)/node->gamesPlayed + sqrt(2.0*log(totalMoves)/node->gamesPlayed);
+}
+
+MonteCarloNode* UCB1(std::vector<MonteCarloNode*>& nodes) {
+	int totalPlayed = 0;
+	for(std::vector<MonteCarloNode*>::iterator it=nodes.begin() ;
+	    it != nodes.end() ; ++it) {
+		totalPlayed += (*it)->gamesPlayed;
+	}
+
+	double pRatio, ratioMax=0;
+	int gP;
+	MonteCarloNode* max = 0, *curr = 0;
+	for(std::vector<MonteCarloNode*>::iterator it=nodes.begin() ;
+	    it != nodes.end() ; ++it) {
+		curr = *it;
+		gP = curr->gamesPlayed;
+		pRatio = (gP>0 ? getPossibleRatio(curr, totalPlayed) : 1);
+		if (pRatio > ratioMax) {
+			max = curr;
+			ratioMax = pRatio;
+		}
+	}
+	return max;
 }

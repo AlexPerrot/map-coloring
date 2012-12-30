@@ -12,7 +12,7 @@ public:
 	MonteCarloNode(MapGame* game, ColoringMove* colorMove, MonteCarloNode* parent);
 	~MonteCarloNode();
 	MonteCarloNode* getParent();
-	std::vector<MonteCarloNode*> getChildren();
+	std::vector<MonteCarloNode*>& getChildren();
 	void playMove();
 	void undoMove();
 	MapGame* getGame();
@@ -28,6 +28,9 @@ private:
 	MapGame* game;
 };
 
-int simulate(MonteCarloNode* node, int nbGames);
-MonteCarloNode* selectNodeForSimu(std::vector<MonteCarloNode*> nodes);
+typedef MonteCarloNode* (*MCSelection)(std::vector<MonteCarloNode*>&);
+
+MonteCarloNode* selectNodeEquiprob(std::vector<MonteCarloNode*>& nodes);
+MonteCarloNode* UCB1(std::vector<MonteCarloNode*>& nodes);
+int simulate(MonteCarloNode* node, int nbGames, MCSelection selectNode=selectNodeEquiprob);
 #endif
