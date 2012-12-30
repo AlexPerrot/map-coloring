@@ -19,6 +19,9 @@ public:
 	int gamesPlayed;
 	int gamesWon;
 
+	void deleteChildren();
+	void deleteParent();
+
 private:
 	void generateChildren();
 	MonteCarloNode* parent;

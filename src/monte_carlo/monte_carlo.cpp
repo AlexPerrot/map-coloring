@@ -52,6 +52,26 @@ void MonteCarloNode::generateChildren() {
 	}
 }
 
+void deleteChildren() {
+	for(std::vector<MonteCarloNode*>::iterator it=children.begin() ;
+	    it != children.end() ; ++it) {
+		(*it)->deleteChildren();
+		delete (*it);
+	}
+}
+
+void deleteParent() {
+	if (parent != 0) {
+		std::vector<MonteCarloNode*>& bro = parent->getChildren();
+		for(std::vector<MonteCarloNode*>::iterator it=bro.begin() ;
+		    it != bro.end() ; ++it) {
+			if ((*it)!=this)
+				delete (*it);
+		}
+		delete parent;
+	}
+}
+
 /****** Other functions ******/
 int simulate(MonteCarloNode* node, int nbGames, MCSelection selectNode) {
 	MapGame* game = node->getGame();
