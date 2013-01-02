@@ -31,9 +31,9 @@ private:
 	MapGame* game;
 };
 
-typedef MonteCarloNode* (*MCSelection)(std::vector<MonteCarloNode*>&);
+typedef MonteCarloNode* (*MCSelection)(std::vector<MonteCarloNode*>&, bool);
 
-MonteCarloNode* selectNodeEquiprob(std::vector<MonteCarloNode*>& nodes);
-MonteCarloNode* UCB1(std::vector<MonteCarloNode*>& nodes);
-int simulate(MonteCarloNode* node, int nbGames, MCSelection selectNode=selectNodeEquiprob);
+MonteCarloNode* selectNodeEquiprob(std::vector<MonteCarloNode*>& nodes, bool minimize=false);
+MonteCarloNode* UCB1(std::vector<MonteCarloNode*>& nodes, bool minimize=false);
+int simulate(MonteCarloNode* node, int nbGames, bool minimize, MCSelection selectNode=selectNodeEquiprob);
 #endif

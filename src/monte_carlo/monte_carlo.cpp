@@ -73,16 +73,16 @@ void MonteCarloNode::deleteParent() {
 }
 
 /****** Other functions ******/
-int simulate(MonteCarloNode* node, int nbGames, MCSelection selectNode) {
+int simulate(MonteCarloNode* node, int nbGames, bool minimize, MCSelection selectNode) {
 	MapGame* game = node->getGame();
 	int nbWon = 0;
 	if (game->isFinished())
 		nbWon = nbGames;
 	else if (game->canContinue()) {
 		for (int i=nbGames ; i>0 ; --i) {
-			MonteCarloNode* child = selectNode(node->getChildren());
+			MonteCarloNode* child = selectNode(node->getChildren(), minimize);
 			child->playMove();
-			nbWon += simulate(child, 1);
+			nbWon += simulate(child, 1, !minimize, selectNode);
 			child->undoMove();
 		}
 	}
@@ -91,32 +91,44 @@ int simulate(MonteCarloNode* node, int nbGames, MCSelection selectNode) {
 	return nbWon;
 }
 
-MonteCarloNode* selectNodeEquiprob(std::vector<MonteCarloNode*>& nodes) {
+MonteCarloNode* selectNodeEquiprob(std::vector<MonteCarloNode*>& nodes, bool minimize) {
 	return nodes.at(rand()%nodes.size()); //dummy for testing purposes
 }
 
-double getPossibleRatio(MonteCarloNode* node, int totalMoves) {
-	return (1.0*node->gamesWon)/node->gamesPlayed + sqrt(2.0*log(totalMoves)/node->gamesPlayed);
+double getPossibleRatio(MonteCarloNode* node, int totalMoves, bool minimize) {
+	double avg = (1.0*node->gamesWon)/node->gamesPlayed;
+	double cb = sqrt(2.0*log(totalMoves)/node->gamesPlayed);
+	return (minimize ? avg-cb : avg + cb);
 }
 
-MonteCarloNode* UCB1(std::vector<MonteCarloNode*>& nodes) {
+MonteCarloNode* UCB1(std::vector<MonteCarloNode*>& nodes, bool minimize) {
 	int totalPlayed = 0;
 	for(std::vector<MonteCarloNode*>::iterator it=nodes.begin() ;
 	    it != nodes.end() ; ++it) {
 		totalPlayed += (*it)->gamesPlayed;
 	}
 
-	double pRatio, ratioMax=0;
+	double pRatio, ratioMax=(minimize?1:0);
 	int gP;
-	MonteCarloNode* max = 0, *curr = 0;
+	MonteCarloNode* max = nodes.at(0), *curr = 0;
 	for(std::vector<MonteCarloNode*>::iterator it=nodes.begin() ;
 	    it != nodes.end() ; ++it) {
 		curr = *it;
 		gP = curr->gamesPlayed;
-		pRatio = (gP>0 ? getPossibleRatio(curr, totalPlayed) : 1);
-		if (pRatio > ratioMax) {
-			max = curr;
-			ratioMax = pRatio;
+		pRatio = (gP>0 ? getPossibleRatio(curr, totalPlayed, minimize) : (minimize?0:1));
+		switch (minimize) {
+		case false:
+			if (pRatio > ratioMax) {
+				max = curr;
+				ratioMax = pRatio;
+			}
+			break;
+		case true:
+			if (pRatio < ratioMax) {
+				max = curr;
+				ratioMax = pRatio;
+			}
+			break;
 		}
 	}
 	return max;
