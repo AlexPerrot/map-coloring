@@ -108,28 +108,35 @@ MonteCarloNode* UCB1(std::vector<MonteCarloNode*>& nodes, bool minimize) {
 		totalPlayed += (*it)->gamesPlayed;
 	}
 
+	std::vector<MonteCarloNode*> maxVector;
 	double pRatio, ratioMax=(minimize?1:0);
 	int gP;
-	MonteCarloNode* max = nodes.at(0), *curr = 0;
+	MonteCarloNode *curr = 0;
 	for(std::vector<MonteCarloNode*>::iterator it=nodes.begin() ;
 	    it != nodes.end() ; ++it) {
 		curr = *it;
 		gP = curr->gamesPlayed;
 		pRatio = (gP>0 ? getPossibleRatio(curr, totalPlayed, minimize) : (minimize?0:1));
-		switch (minimize) {
-		case false:
-			if (pRatio > ratioMax) {
-				max = curr;
-				ratioMax = pRatio;
+		if (pRatio == ratioMax) {
+			maxVector.push_back(curr);
+		} else {
+			switch (minimize) {
+			case false:
+				if (pRatio > ratioMax) {
+					maxVector.clear();
+					maxVector.push_back(curr);
+					ratioMax = pRatio;
+				}
+				break;
+			case true:
+				if (pRatio < ratioMax) {
+					maxVector.clear();
+					maxVector.push_back(curr);
+					ratioMax = pRatio;
+				}
+				break;
 			}
-			break;
-		case true:
-			if (pRatio < ratioMax) {
-				max = curr;
-				ratioMax = pRatio;
-			}
-			break;
 		}
 	}
-	return max;
+	return selectNodeEquiprob(maxVector, minimize);
 }
