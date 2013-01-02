@@ -16,6 +16,7 @@ public:
 	void playMove();
 	void undoMove();
 	MapGame* getGame();
+	ColoringMove* getMove();
 	int gamesPlayed;
 	int gamesWon;
 

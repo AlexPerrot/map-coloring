@@ -42,6 +42,10 @@ MapGame* MonteCarloNode::getGame() {
 	return game;
 }
 
+ColoringMove* MonteCarloNode::getMove() {
+	return move;
+}
+
 void MonteCarloNode::generateChildren() {
 	childrenGenerated = true;
 	// complete whith children generation

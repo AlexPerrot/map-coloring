@@ -31,8 +31,8 @@ public:
 	SelectionAlgorithm(MapGame& game);
 	virtual vertex selectVertex();
 	virtual color selectColor(vertex v);
-	ColoringMove selectMove();
-private:
+	virtual ColoringMove selectMove();
+protected:
 	MapGame& game;
 };
 
