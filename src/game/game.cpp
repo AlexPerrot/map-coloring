@@ -7,9 +7,14 @@
 /****** MapGame ******/
 
 MapGame::MapGame(Graph& g, int maxColors)
- : graph(g), maxColors(maxColors), firstUnusedColor(0) {
+ : graph(g), maxColors(maxColors) {
 
  }
+
+MapGame::MapGame(const MapGame& game)
+	: graph(game.graph), maxColors(game.maxColors) {
+
+}
 
 Graph& MapGame::getGraph() {
 	return graph;
@@ -51,8 +56,10 @@ bool* MapGame::getVisibleColors(vertex v) {
 
 	//parcours des voisins
 	AdjacencyIterator neigh = graph.getNeighbours(v);
+	color c;
 	while(neigh.hasNext()) {
-		color c = graph.getVertexProperties(neigh.getCurrent()).getColor();
+		VertexProperties& prop = graph.getVertexProperties(neigh.getCurrent());
+		c = prop.getColor();
 		//ajout des couleurs existantes
 		if (c>=0)
 			existingColors[c] = true;

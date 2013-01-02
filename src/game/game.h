@@ -9,6 +9,7 @@ class Player;
 class MapGame {
 	public:
 		MapGame(Graph& g, int maxColors);
+		MapGame(const MapGame& game);
 		Graph& getGraph();
 		color getFirstUnusedColor();
 		int getMaxColors();
@@ -18,9 +19,8 @@ class MapGame {
 		void reset();
 		bool* getVisibleColors(vertex v);
 	private:
-		Graph& graph;
+		Graph graph;
 		int maxColors;
-		color firstUnusedColor;
 		bool seesEveryColor(vertex v);
 };
 

@@ -17,6 +17,8 @@
  class VertexProperties {
 	public:
 		VertexProperties();
+		VertexProperties(const VertexProperties& vp);
+		VertexProperties& operator=(const VertexProperties& vp);
 		color getColor();
 		void setColor(color newColor);
 		void uncolor();
@@ -72,6 +74,7 @@ class AdjacencyIterator : public Iterator {
 class Graph {
 	public:
 		Graph();
+		Graph(const Graph& g);
 		vertex addVertex();
 		void addEdge(vertex source, vertex target);
 		vertex getVertex(int n);

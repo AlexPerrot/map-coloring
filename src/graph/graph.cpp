@@ -1,3 +1,5 @@
+#include <boost/graph/copy.hpp>
+
 #include "graph.h"
 
 
@@ -6,6 +8,18 @@
 VertexProperties::VertexProperties() : vertexColor(-1), colored(false) {
 	
 }
+
+VertexProperties::VertexProperties(const VertexProperties& vp)
+	: vertexColor(vp.vertexColor), colored(vp.colored) {
+
+}
+
+VertexProperties& VertexProperties::operator=(const VertexProperties& vp) {
+	vertexColor = vp.vertexColor;
+	colored = vp.colored;
+	return *this;
+}
+
 
 color VertexProperties::getColor() {
 	return vertexColor;
@@ -30,6 +44,10 @@ bool VertexProperties::isColored() {
 
 Graph::Graph() : boostDeleg() {
 	
+}
+
+Graph::Graph(const Graph& g) : boostDeleg() {
+	boost::copy_graph(g.boostDeleg, boostDeleg);
 }
 
 vertex Graph::addVertex() {
