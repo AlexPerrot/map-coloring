@@ -8,6 +8,7 @@ class MonteCarloSelection : public SelectionAlgorithm {
 public:
 	MonteCarloSelection(MapGame& game, bool minimize=false);
 	virtual ColoringMove selectMove();
+	void reset();
 protected:
 	MonteCarloNode* tree;
 	bool minimize;

@@ -40,17 +40,27 @@ ColoringMove MonteCarloSelection::selectMove() {
 	}
 
 	//simulations
-	simulate(tree, 1000, minimize, UCB1);
+	simulate(tree, 10000, minimize, UCB1);
 
 	//selection du coup
-	int nbPlayed = 0;
-	MonteCarloNode* best(0);
 	std::vector<MonteCarloNode*> children = tree->getChildren();
+	MonteCarloNode* best(children.at(0));
+	int nbWon = best->gamesWon;
 	for(std::vector<MonteCarloNode*>::iterator it=children.begin() ;
 	    it != children.end() ; ++it) {
-		if((*it)->gamesPlayed > nbPlayed) {
-			nbPlayed = (*it)->gamesPlayed;
-			best = (*it);
+		switch(minimize) {
+		case false:
+			if((*it)->gamesWon > nbWon) {
+				nbWon = (*it)->gamesWon;
+				best = (*it);
+			}
+			break;
+		case true:
+			if((*it)->gamesWon < nbWon) {
+				nbWon = (*it)->gamesWon;
+				best = (*it);
+			}
+			break;
 		}
 	}
 	
@@ -60,4 +70,12 @@ ColoringMove MonteCarloSelection::selectMove() {
 
 	return *(tree->getMove());
 
+}
+
+void MonteCarloSelection::reset() {
+	delete tree->getGame();
+	tree->deleteChildren();
+	delete tree;
+	MapGame* tmp = new MapGame(game);
+	tree = new MonteCarloNode(tmp);
 }

@@ -3,7 +3,7 @@ CFLAGS = -Wall -g
 EXEC_NAME = map_coloring
 INCLUDES = 
 LIBS =
-OBJ_FILES = main.o graph/graph.o game/game.o game/move.o monte_carlo/monte_carlo.o
+OBJ_FILES = main.o graph/graph.o game/game.o game/move.o monte_carlo/monte_carlo.o monte_carlo/monte_carlo_algo.o
 
 all : $(EXEC_NAME)
 

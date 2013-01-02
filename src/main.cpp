@@ -4,6 +4,7 @@
 #include "graph/graph.h"
 #include "game/game.h"
 #include "monte_carlo/monte_carlo.h"
+#include "monte_carlo/monte_carlo_algo.h"
 
 int main(int argc, char* argv[]) {
 
@@ -30,7 +31,7 @@ int main(int argc, char* argv[]) {
 		 << " vertices"  << std::endl;
 	std::cout << (game.isFinished()?"finished":"not finished") << std::endl;
 
-	SelectionAlgorithm algoAlice(game), algoBob(game);
+	MonteCarloSelection algoAlice(game, false), algoBob(game, true);
 	Player alice(algoAlice);
 	Player bob(algoBob);
 	int nbGagnees = 0;
@@ -39,14 +40,16 @@ int main(int argc, char* argv[]) {
 		if (game.play(alice, bob))
 			++nbGagnees;
 		game.reset();
+		algoAlice.reset();
+		algoBob.reset();
 	}
 
 	std::cout << "alice a gagne " << nbGagnees << "/" << nbParties << " parties" << std::endl;
 
-	MonteCarloNode* mcTree = new MonteCarloNode(&game);
-	int nbWon = simulate(mcTree, nbParties, false, UCB1);
-	std::cout << "Monte-Carlo a gagne " << nbWon << "/" << nbParties << " parties" << std::endl;
+	// MonteCarloNode* mcTree = new MonteCarloNode(&game);
+	// int nbWon = simulate(mcTree, nbParties, false, UCB1);
+	// std::cout << "Monte-Carlo a gagne " << nbWon << "/" << nbParties << " parties" << std::endl;
 
-	mcTree->deleteChildren();
-	delete mcTree;
+	// mcTree->deleteChildren();
+	// delete mcTree;
 }
