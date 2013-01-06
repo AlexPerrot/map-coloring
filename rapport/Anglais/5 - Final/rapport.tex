@@ -1,0 +1,91 @@
+\documentclass[a4paper, oneside, 10pt]{book}
+
+\input{../header}
+
+\hypersetup{
+    pdfauthor   = {Arnaud Audoin, Clément Badiola, Samuel Da Silva, Alexandre Perrot, Camille Ritlewski},% 
+    pdftitle    = {PER - Rapport final},%
+    pdfsubject  = {Rapport final},% 
+    pdfkeywords = {},% 
+    pdfcreator  = {PDFLaTeX},% 
+    pdfproducer = {PDFLaTeX}} 
+
+\author{Arnaud~\textsc{Audoin} \and Clément~\textsc{Badiola} \and Samuel~\textsc{Da~Silva} \and Alexandre~\textsc{Perrot} \and Camille~\textsc{Ritlewski} \and \\
+  Client : Paul~\textsc{Dorbec}}
+\title{The map coloring game \\ Final report}
+\date{15 janvier 2013}
+
+\begin{document}
+
+\fancyhf{} 
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}} 
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}} 
+\fancyhead[R]{\bfseries\thepage}% Left Even, Right Odd - No de page 
+\fancyhead[L]{\bfseries\rightmark} % Left Odd - Titre section 
+\renewcommand{\headrulewidth}{0.5pt}% filet en haut de page 
+\addtolength{\headheight}{0.5pt} % espace pour le filet 
+\renewcommand{\footrulewidth}{0pt} % pas de filet en bas 
+\fancypagestyle{plain}{ % pages de tetes de chapitre 
+  \fancyhead{} % supprime lentete 
+  \renewcommand{\headrulewidth}{0pt} % et le filet 
+}
+
+\fancypagestyle{plain}{
+	\fancyhf{}
+	\fancyfoot[C]{\thepage}
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0pt}}
+
+\dominitoc
+
+\maketitle
+
+\frontmatter
+
+\input{chapters/probleme} %Enoncé du problème et des objectifs puis résumé (synthèse d'une page max.) du projet
+
+\tableofcontents
+
+\mainmatter
+
+\input{chapters/introduction} %Définir le probleme, les objectifs, le cadre de travail (contexte).
+\input{chapters/documentation} %etat de l'art (contexte technique et scientifique), bibliographie importante.
+\input{chapters/theorie} %théorie spécifique à notre probleme (les differents théoremes) (les détails seront a mettre en annexe).
+%\input{chapters/cdc} %A mettre ou pas ? On verra avec monsieur Narbel
+%\input{chapters/architecture} %A mettre ou pas ? On verra avec monsieur Narbel
+\input{chapters/travail} %Expliquer les expériences réalisées, montrer en quoi elles sont pertinentes. Puis montrer quels objectifs ont été atteints. Caractériser le système (sur quoi notre logiciel marche bien, à partir de quand ça se dégrade etc.).
+\input{chapters/bilan}
+
+\appendix
+
+\input{chapters/annexe1}
+\input{chapters/annexe2}
+\input{chapters/annexe3}
+
+\backmatter
+
+\bibliographystyle{plain-fr}
+\bibliography{../refs}
+
+\listoffigures
+
+\listoftables
+
+%\tableofcontents
+
+\newpage
+\pagestyle{empty}
+
+Rapport de projet d'études et de recherche.\\
+The map coloring game.\\
+Master 2, 2012
+
+\vfill
+
+Les sources de ce rapport sont disponibles librement sur %\url{http://}.
+
+\bigskip
+
+%Certaines images illustrant ce document sont extraites de nomdusite (\url{http://}). Elles sont disponibles sous licence Creative Commons ou dans le domaine public.
+
+\end{document}

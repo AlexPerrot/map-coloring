@@ -1,0 +1,37 @@
+% sommaire
+%
+\RequirePackage{ifthen}
+
+
+% commandes produisant l'entrée dans le sommaire
+% sont celles produisant les entrées dans la table des matières
+% \let\l@somsection\l@section
+% \let\l@somchapter\l@chapter
+% \let\l@sompart\l@part
+
+
+
+\newcommand{\sommaire}{%
+  \setlength{\parskip}{0pt plus 1.0pt}
+  \chapter*{Sommaire}
+  \@starttoc{som}%
+  \setlength{\parskip}{0pt plus 1.0pt}}
+
+\let\aclORIG\addcontentsline
+
+% on redéfinit \addcontentsline pour insérer aussi dans le sommaire
+% 
+\renewcommand{\addcontentsline}[3]{%
+  \aclORIG{#1}{#2}{#3}
+  \ifthenelse{\equal{#2}{section}}%
+  {\aclORIG{som}{section}{#3}}{}%
+  \ifthenelse{\equal{#2}{chapter}}%
+  {\aclORIG{som}{chapter}{#3}}{}%
+  \ifthenelse{\equal{#2}{part}}%
+  {\aclORIG{som}{part}{#3}}{}}
+
+\renewcommand{\addcontentsline}[3]{%
+  \aclORIG{#1}{#2}{#3}%
+  \ifthenelse{% on insère sections, chapitres et parties 
+    \equal{#2}{section} \or \equal{#2}{chapter} \or \equal{#2}{part}}{%
+    \aclORIG{som}{#2}{#3}}{}}

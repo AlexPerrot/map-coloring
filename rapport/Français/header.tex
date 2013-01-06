@@ -1,0 +1,81 @@
+\usepackage{fancyhdr,verbatim, listings, color} 
+\usepackage{shorttoc}
+\usepackage[french]{minitoc}
+\usepackage[pdftex]{graphicx} 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel}
+\usepackage{amsmath,amssymb,mathrsfs}
+\usepackage[french]{varioref}
+\usepackage{url}
+\usepackage{../nota}
+\usepackage{../citation}
+%\usepackage{../sommaire}
+
+\graphicspath{%
+  {../imgs/}%
+  {imgs/}
+}
+
+% NOTES
+\setlength{\largeurnota}{.8cm}
+\newenvironment{attention}{%
+  \begin{pictonote}{attention}}{\end{pictonote}}
+\newenvironment{note}{%
+  \begin{pictonote}{note}}{\end{pictonote}}
+\newenvironment{question}{%
+  \begin{pictonote}{question}}{\end{pictonote}}
+
+\usepackage[pdftex=true,
+    bookmarks         = true,
+    bookmarksnumbered = true,
+    bookmarks = true, 
+    pdfstartview      = FitH,
+    bookmarksopen     = true, 
+    bookmarksopenlevel = 1, 
+    hyperindex        = true,
+    colorlinks        = true,
+    %urlcolor          = red,
+    %pdfborder         = {0 0 0}
+    ]{hyperref}
+
+\definecolor{colKeys}{rgb}{0,0,1} 
+\definecolor{colIdentifier}{rgb}{0,0,0} 
+\definecolor{colComments}{rgb}{0,0.5,1} 
+\definecolor{colString}{rgb}{0.6,0.1,0.1} 
+
+\lstset{
+float=hbp,
+basicstyle=\ttfamily\small,
+identifierstyle=\color{colIdentifier},
+keywordstyle=\color{colKeys},
+stringstyle=\color{colString},
+commentstyle=\color{colComments},
+language=c++,
+columns=flexible,
+tabsize=2,
+frame=trBL,
+frameround=tttt,
+extendedchars=true,
+showspaces=false,
+showstringspaces=false,
+numbers=left,
+numberstyle=\tiny,
+breaklines=true,
+breakautoindent=true,
+captionpos=b,
+commentstyle=\textit
+}
+
+\lstnewenvironment{cpp}{\lstset{language=c++}}{}
+
+%% Define a new 'leo' style for the package that will use a smaller font.
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
+\makeatother
+%% Now actually use the newly defined style.
+\urlstyle{leo}
+
+\pagestyle{fancy} 
+
