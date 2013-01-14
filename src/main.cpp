@@ -13,7 +13,7 @@
 #include "monte_carlo/monte_carlo_algo.h"
 
 void usage(std::ostream& stream) {
-  stream << "usage: map_coloring graph.dot nb_colors [nb_games]" << std::endl;
+  stream << "usage: map_coloring graph.dot nb_colors [nb_games] [nb_simu]" << std::endl;
   exit(0);
 }
 
@@ -28,6 +28,8 @@ int main(int argc, char* argv[]) {
 	int nbParties = 10;
 	if (argc > 3)
 		nbParties = atoi(argv[3]);
+	if (argc > 4)
+	  setNumberOfSimulations(atoi(argv[4]));
 
 	Graph g;
 	g.getGraphFromDot(argv[1]);
@@ -58,6 +60,7 @@ int main(int argc, char* argv[]) {
 		game.reset();
 		algoAlice.reset();
 		algoBob.reset();
+		std::cout << "Played " << i+1 << " games" << std::endl;
 	}
 
 	std::cout << "alice a gagne " << nbGagnees << "/" << nbParties << " parties" << std::endl;

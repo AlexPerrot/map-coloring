@@ -4,6 +4,8 @@
 #include "monte_carlo.h"
 #include "../game/game.h"
 
+void setNumberOfSimulations(int nb);
+
 class MonteCarloSelection : public SelectionAlgorithm {
 public:
 	MonteCarloSelection(MapGame& game, bool minimize=false);

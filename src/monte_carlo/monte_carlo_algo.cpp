@@ -2,6 +2,10 @@
 
 static int nb_simu = 1000;
 
+void setNumberOfSimulations(int nb) {
+  nb_simu = nb;
+}
+
 MonteCarloSelection::MonteCarloSelection(MapGame& game, bool minimize)
 	: SelectionAlgorithm(game), tree(0), minimize(minimize) {
 	MapGame* tmp = new MapGame(game);
