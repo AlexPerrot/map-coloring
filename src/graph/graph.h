@@ -91,7 +91,7 @@ class Graph {
 		void printGraph();
 private:
 		graph boostDeleg;
-		std::ifstream in;
+		std::ifstream* in;
 		boost::dynamic_properties dp;
 };
 

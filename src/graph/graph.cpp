@@ -82,9 +82,9 @@ AdjacencyIterator Graph::getNeighbours(vertex v) {
 // Easy to use but raises an exception if the dot input file has information the graph can't handle.
 void Graph::getGraphFromDot(const std::string& filename)
 {
-	this->in = std::ifstream(filename.c_str());
+	this->in = new std::ifstream(filename.c_str());
 	dp.property("node_id", boost::get(&VertexProperties::name, this->boostDeleg));
-	boost::read_graphviz(in, this->boostDeleg, dp, "node_id");
+	boost::read_graphviz(*in, this->boostDeleg, dp, "node_id");
 }
 
 void Graph::printGraph()
