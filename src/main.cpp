@@ -12,16 +12,25 @@
 #include "monte_carlo/monte_carlo.h"
 #include "monte_carlo/monte_carlo_algo.h"
 
+void usage(std::ostream& stream) {
+  stream << "usage: map_coloring graph.dot nb_colors [nb_games]" << std::endl;
+  exit(0);
+}
+
 int main(int argc, char* argv[]) {
 
+  if (argc < 3)
+    usage(std::cout);
+
+  int nb_colors = atoi(argv[2]);
 	srand(time(0));
 
 	int nbParties = 10;
-	if (argc > 1)
-		nbParties = atoi(argv[1]);
+	if (argc > 3)
+		nbParties = atoi(argv[3]);
 
 	Graph g;
-	g.getGraphFromDot("graphviz_example.dot");
+	g.getGraphFromDot(argv[1]);
 	/*for(int i=0 ; i<6 ; i++)
 		g.addVertex();
 	g.addEdge(g.getVertex(1), g.getVertex(2));
@@ -32,7 +41,7 @@ int main(int argc, char* argv[]) {
 	g.addEdge(g.getVertex(4), g.getVertex(5));
 	g.addEdge(g.getVertex(0), g.getVertex(5));
 	*/
-	MapGame game(g, 3);
+	MapGame game(g, nb_colors);
 
 	std::cout << "The graph has " << game.getGraph().getNbVertices()
 		 << " vertices"  << std::endl;
