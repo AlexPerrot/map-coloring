@@ -3,8 +3,8 @@
 #include <time.h>
 
 // For testing purpose
-#include <chrono>
-#include <thread>
+// #include <chrono>
+// #include <thread>
 // End for testing purpose
 
 #include "graph/graph.h"
@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
 	// delete mcTree;
 
 	// For testing purpose
-	g.printGraph(); // Only works on graph generated from a dot file using getGraphFromDot
-	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+	// g.printGraph(); // Only works on graph generated from a dot file using getGraphFromDot
+	// std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 	// End for testing purpose
 }
