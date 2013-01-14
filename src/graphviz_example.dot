@@ -1,0 +1,4 @@
+graph foo {
+  foo -- bar;
+  bar -- 1;
+}

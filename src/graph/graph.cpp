@@ -79,6 +79,19 @@ AdjacencyIterator Graph::getNeighbours(vertex v) {
 	return AdjacencyIterator(boost::adjacent_vertices(v, boostDeleg));
 }
 
+// Easy to use but raises an exception if the dot input file has information the graph can't handle.
+void Graph::getGraphFromDot(const std::string& filename)
+{
+	this->in = std::ifstream(filename.c_str());
+	dp.property("node_id", boost::get(&VertexProperties::name, this->boostDeleg));
+	boost::read_graphviz(in, this->boostDeleg, dp, "node_id");
+}
+
+void Graph::printGraph()
+{
+	boost::write_graphviz_dp(std::cout, this->boostDeleg, this->dp, std::string("node_id"));
+}
+
 
 /****** VertexIterator Implementation ******/
 

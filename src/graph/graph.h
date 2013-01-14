@@ -1,7 +1,11 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
+#include <boost/regex.hpp>
+#include <boost/graph/graphviz.hpp>
 #include <boost/graph/adjacency_list.hpp>
+#include <string>
+#include <fstream>
 
 /*
  * Ces classes sont une surcouche aux graphes boost
@@ -23,6 +27,7 @@
 		void setColor(color newColor);
 		void uncolor();
 		bool isColored();
+		std::string name;
 	private:
 		color vertexColor;
 		bool colored;
@@ -82,8 +87,12 @@ class Graph {
 		VertexProperties& getVertexProperties(vertex v);
 		VertexIterator getVertices();
 		AdjacencyIterator getNeighbours(vertex v);
-	private:
+		void getGraphFromDot(const std::string& filename);
+		void printGraph();
+private:
 		graph boostDeleg;
+		std::ifstream in;
+		boost::dynamic_properties dp;
 };
 
 #endif
