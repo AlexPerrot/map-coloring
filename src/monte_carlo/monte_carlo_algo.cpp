@@ -1,5 +1,7 @@
 #include "monte_carlo_algo.h"
 
+static int nb_simu = 1000;
+
 MonteCarloSelection::MonteCarloSelection(MapGame& game, bool minimize)
 	: SelectionAlgorithm(game), tree(0), minimize(minimize) {
 	MapGame* tmp = new MapGame(game);
@@ -40,7 +42,7 @@ ColoringMove MonteCarloSelection::selectMove() {
 	}
 
 	//simulations
-	simulate(tree, 10000, minimize, UCB1);
+	simulate(tree, nb_simu, minimize, UCB1);
 
 	//selection du coup
 	std::vector<MonteCarloNode*> children = tree->getChildren();
