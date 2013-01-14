@@ -28,6 +28,10 @@
 		void uncolor();
 		bool isColored();
 		std::string name;
+		std::string height;
+		std::string width;
+		std::string label;
+		std::string shape;
 	private:
 		color vertexColor;
 		bool colored;

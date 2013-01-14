@@ -84,6 +84,10 @@ void Graph::getGraphFromDot(const std::string& filename)
 {
 	this->in = new std::ifstream(filename.c_str());
 	dp.property("node_id", boost::get(&VertexProperties::name, this->boostDeleg));
+	dp.property("height", boost::get(&VertexProperties::height, this->boostDeleg));
+	dp.property("width", boost::get(&VertexProperties::width, this->boostDeleg));
+	dp.property("label", boost::get(&VertexProperties::label, this->boostDeleg));
+	dp.property("shape", boost::get(&VertexProperties::shape, this->boostDeleg));
 	boost::read_graphviz(*in, this->boostDeleg, dp, "node_id");
 }
 
