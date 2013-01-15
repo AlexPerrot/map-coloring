@@ -69,8 +69,10 @@ void MonteCarloNode::deleteParent() {
 		std::vector<MonteCarloNode*>& bro = parent->getChildren();
 		for(std::vector<MonteCarloNode*>::iterator it=bro.begin() ;
 		    it != bro.end() ; ++it) {
-			if ((*it)!=this)
-				delete (*it);
+		  if ((*it)!=this) {
+		    (*it)->deleteChildren();
+		    delete (*it);
+		  }
 		}
 		delete parent;
 	}
