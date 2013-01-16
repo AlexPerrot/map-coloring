@@ -1,2 +1,4 @@
 #nb_couleurs nb_parties nb_gagnees nb_simus
 3 1000 983 1000
+2 1000 223 1000
+1 1000 0 1000
