@@ -53,6 +53,8 @@ int main(int argc, char* argv[]) {
 	Player alice(algoAlice);
 	Player bob(algoBob);
 	int nbGagnees = 0;
+	std::cout << "Played " << 0 << " games, alice won " << nbGagnees;
+	std::cout.flush();
 	for (int i = 0; i < nbParties; ++i)
 	{
 		if (game.play(alice, bob))
@@ -60,9 +62,10 @@ int main(int argc, char* argv[]) {
 		game.reset();
 		algoAlice.reset();
 		algoBob.reset();
-		std::cout << "Played " << i+1 << " games" << std::endl;
+		std::cout << "\rPlayed " << i+1 << " games, alice won " << nbGagnees;
+		std::cout.flush();
 	}
-
+	std::cout << std::endl;
 	std::cout << "alice a gagne " << nbGagnees << "/" << nbParties << " parties" << std::endl;
 
 	// MonteCarloNode* mcTree = new MonteCarloNode(&game);
