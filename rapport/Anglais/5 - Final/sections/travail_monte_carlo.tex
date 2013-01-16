@@ -3,11 +3,20 @@
 Monte-Carlo methods are a set of randomized algorithms. The general idea is to use random sampling rather than computing to help solve a problem. Such algorithms are mostly used when computing a solution to the problem is not feasible. Because of the use of random sampling, they are heuristical by nature : their results are not always guaranteed to be exact. Throughout the years, Monte-Carlo methods have been successfully used in physics, mathematics  and computer science.\\
 
 
-In this report, we will be interested in a special case of Monte-Carlo method : Monte-Carlo tree search, aka MCTS. It applies Monte-Carlo principles to tree exploration. The main field of application is artificial intelligence, especially games with very large move space where a complete tree exploration is not possible in reasonable time, such as Chess and Go.
+In this report, we will be interested in a special case of Monte-Carlo method : Monte-Carlo tree search, aka MCTS. It applies Monte-Carlo principles to tree exploration. The main field of application is artificial intelligence, especially games with very large move space where a complete tree exploration is not possible in reasonable time, such as Chess and Go.\\
 
 MCTS is composed of four steps : selection, expansion, simulation and backpropagation. Thoses steps are repeated until time runs out, the maximum number of simulated games has been played, a satisfying result is found or whatever condition is relevant. Generally, the more iterations are run, the more accurate is the result.
 
 The selection step chooses a node to play a simulation from. Several algorithms exist for this stage, depending on the context. The expansion step produces childs of the selected node if not already generated. This step makes the search tree grow in height. The simulation step plays the game until the end following nodes selected with a selection algorithm which can be the same as the one used in the selection step or a different one. Finally, th backpropagation step uses the outcome of the simulated game to modify the estimated value of the traversed nodes. This is the crucial step to know what has been played and if the selected moves good choices or not.
+
+After playing enough simulated games, a player can then choose amongst the playable moves which one to play using the estimated value of the move. The choice algorithm can be one of the followings (from \cite{ChasPHD}) :
+\begin{itemize}
+\item Max Child : Choosing the node with the highest value.
+\item Robust Child : Choosing the node with the highest number of games played.
+\item Robust-Max Child : Choosing the node with both the best value and highest number of games played.
+\item Secure Child : Choosing the node maximizing a lower confidence bound.\\
+\end{itemize}
+
 
 \begin{figure}
 \centering
@@ -20,6 +29,15 @@ applicable if at least the following three conditions are satisfied: (1) the pay
 (the game scores are bounded), (2) the rules are known (complete information), and (3) simulations terminate relatively fast (game length is limited)". Those three criterias are verified in the case of the map-coloring game. We will use Monte-Carlo tree search to implement an AI capable of playing Alice or Bob.\\
 
 \section{How our AI works}
+
+To modelise a map-coloring game, each node of the exploration tree will contain:
+\begin{itemize}
+\item The move played when choosing that node, which is simply the node chosen in the game graph and the color used.
+\item The total number of games played through that node.
+\item The number of games with a favorable outcome for Alice while playing through that node.
+\end{itemize}
+For each node in the search tree, its value can be seen as the victory ratio for Alice : (games won/games played).
+
 
 Dans Monte Carlo, on va chercher à jouer beaucoup de parties pour un graph donné (que nous appellerons le graph étudié) afin de pouvoir jouer les meilleurs coups possibles. 
 Pour chaque graph étudié, nous générons un arbre des coups joués où chaque nœuds, sauf la racine, correspondent à des coups joués sur ce graph. 
