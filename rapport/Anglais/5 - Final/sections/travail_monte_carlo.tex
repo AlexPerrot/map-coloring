@@ -9,7 +9,7 @@ MCTS is composed of four steps : selection, expansion, simulation and backpropag
 
 The selection step chooses a node to play a simulation from. Several algorithms exist for this stage, depending on the context. The expansion step produces childs of the selected node if not already generated. This step makes the search tree grow in height. The simulation step plays the game until the end following nodes selected with a selection algorithm which can be the same as the one used in the selection step or a different one. Finally, th backpropagation step uses the outcome of the simulated game to modify the estimated value of the traversed nodes. This is the crucial step to know what has been played and if the selected moves good choices or not.
 
-After playing enough simulated games, a player can then choose amongst the playable moves which one to play using the estimated value of the move. The choice algorithm can be one of the followings (from \cite{ChasPHD}) :
+After playing enough simulated games, a player can then choose amongst the playable moves which one to play using the estimated value of the move. The choice algorithm can be one of the followings (from \cite{ChaPHD}) :
 \begin{itemize}
 \item Max Child : Choosing the node with the highest value.
 \item Robust Child : Choosing the node with the highest number of games played.
@@ -36,8 +36,14 @@ To modelise a map-coloring game, each node of the exploration tree will contain:
 \item The total number of games played through that node.
 \item The number of games with a favorable outcome for Alice while playing through that node.
 \end{itemize}
-For each node in the search tree, its value can be seen as the victory ratio for Alice : (games won/games played).
+For each node in the search tree, its value can be seen as the victory ratio for Alice : (games won/games played).\\
 
+The selection algorithm we used is based on multi-armed bandit algorithms as described in \cite{MAB}. Indeed, selecting a node amongst the children of the current node in the tree can be seen as a multi-armed bandit problem, where each node is a bandit, its profit being its value. We chose the UCT algorithm, based un the UCB1 multi-armed bandit algorithm, described in \cite{ChaPHD}. This algorithm is called best-first because it always selects the node which seems to be the best. This estimation is based on the value of the node and an upper confidence bound. This bound only depends on the number of games played in the node and its parent. For every game played through a node, the upper confidence bound of this node is reduced. This is a formal way of describing an intuitive idea : "The more i play this move, the more i am confident in the value i have calculated". The best node according to the algorithm is the node whose value plus upper confidence bound is the highest. By using this algorithm, we can quickly stop exploring the least ietersting nodes to concentrates on better ones, thus maximizing the profit from a fixed number of simulations.\\
+
+Nevertheless, this algorithm is adapted to a general Monte-Carlo tree search. In our particular case, we deal with a game between two opponents whose objectives are opposite. Using this algorithm directly would bring us to consider that the opponent is playing toward the same goal, thus helping us, which is of course false. The canonic way of dealing with that problem in a two-player zero-sum game is called Minimax (established in \cite{Minimax}). When exploring a tree with Minimax, the values are maximized when playing with player 1 and minimized when playing player 2, to represent the opposite goal. We reproced a similar process in the UCT algorithm. If Alice is playing, the confidence interval of the node is added to its value, and the chosen node is the the one with the highest resulting total. On the contrary, if Bob is playing, the confidence interval is substracted from the value, resulting in a lower confidence bound. The selected node is then the one with the lowest lower confidence bound.
+Using this minimax UCT algorithm, our AI implementation will be the same both for Alice and Bob.\\
+
+The other steps of the Monte-Carlo tree search are now straightforward. The expansion step just generates every legal move on the graph from the current position with the currently used colors, and moves with a new colors and adds a node for each one. The simulation step reuses the selection algorithm to play until the game in finished. Finally, the backpropagating step increments the number of games played and won according to the outcome of the game.\\
 
 Dans Monte Carlo, on va chercher à jouer beaucoup de parties pour un graph donné (que nous appellerons le graph étudié) afin de pouvoir jouer les meilleurs coups possibles. 
 Pour chaque graph étudié, nous générons un arbre des coups joués où chaque nœuds, sauf la racine, correspondent à des coups joués sur ce graph. 
