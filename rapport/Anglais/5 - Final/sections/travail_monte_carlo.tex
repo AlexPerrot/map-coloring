@@ -1,4 +1,9 @@
 \section{Monte Carlo}
+
+Monte-Carlo methods are a set of randomized algorithms. The general idea is to use random sampling rather than computing to help solve a problem. Such algorithms are mostly used when computing a solution to the problem is not feasible. Because of the use of random sampling, they are heuristical by nature : their results are not always guaranteed to be exact. Throughout the years, Monte-Carlo methods have been successfully used in physics, mathematics  and computer science.
+
+In this report, we will be interested in a special case of Monte-Carlo method : Monte-Carlo tree search, aka MCTS. It applies Monte-Carlo principles to tree exploration. The main field of application is artificial intelligence, especially games with very large move space where a complete tree exploration is not possible in reasonable time, such as Chess and Go.
+
 Dans Monte Carlo, on va chercher à jouer beaucoup de parties pour un graph donné (que nous appellerons le graph étudié) afin de pouvoir jouer les meilleurs coups possibles. 
 Pour chaque graph étudié, nous générons un arbre des coups joués où chaque nœuds, sauf la racine, correspondent à des coups joués sur ce graph. 
 
