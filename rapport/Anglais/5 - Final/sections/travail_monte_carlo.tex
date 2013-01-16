@@ -7,6 +7,8 @@ In this report, we will be interested in a special case of Monte-Carlo method : 
 
 MCTS is composed of four steps : selection, expansion, simulation and backpropagation. Thoses steps are repeated until time runs out, the maximum number of simulated games has been played, a satisfying result is found or whatever condition is relevant. Generally, the more iterations are run, the more accurate is the result.
 
+The selection step chooses a node to play a simulation from. Several algorithms exist for this stage, depending on the context. The expansion step produces childs of the selected node if not already generated. This step makes the search tree grow in height. The simulation step plays the game until the end following nodes selected with a selection algorithm which can be the same as the one used in the selection step or a different one. Finally, th backpropagation step uses the outcome of the simulated game to modify the estimated value of the traversed nodes. This is the crucial step to know what has been played and if the selected moves good choices or not.
+
 \begin{figure}
 \centering
 \includegraphics[width=300pt]{mcts-algorithm.png}
@@ -15,7 +17,9 @@ MCTS is composed of four steps : selection, expansion, simulation and backpropag
 
 According to Guillaume Chaslot \cite{ChaPHD} : "MCTS is
 applicable if at least the following three conditions are satisfied: (1) the payoffs are bounded
-(the game scores are bounded), (2) the rules are known (complete information), and (3) simulations terminate relatively fast (game length is limited)". Those three criterias are verified in the case of the map-coloring game.\\
+(the game scores are bounded), (2) the rules are known (complete information), and (3) simulations terminate relatively fast (game length is limited)". Those three criterias are verified in the case of the map-coloring game. We will use Monte-Carlo tree search to implement an AI capable of playing Alice or Bob.\\
+
+\section{How our AI works}
 
 Dans Monte Carlo, on va chercher à jouer beaucoup de parties pour un graph donné (que nous appellerons le graph étudié) afin de pouvoir jouer les meilleurs coups possibles. 
 Pour chaque graph étudié, nous générons un arbre des coups joués où chaque nœuds, sauf la racine, correspondent à des coups joués sur ce graph. 
@@ -39,7 +43,7 @@ D’autre part nous allons généré le graph au fur et a mesure des parties et 
 \end{itemize}
 Quand on a joué dans un nœud, on a un pourcentage de victoire pour le coup correspondant, mais il n’est pas forcément représentatif. Le fait de jouer plus de parties va permettre de diminuer l'intervalle de confiance de ce ratio de victoire.
 
-\subsection {Algorithme de notre IA}
+%\subsection {Algorithme de notre IA}
 Pour éviter de toujours passer par les mêmes nœuds, nous allons essayé passer par tous les frères d’un nœud déjà visité avant de pouvoir le revisiter pour explorer ces fils. Ce qui compte, ce sont surtout les coups au premier niveau (le niveau que l’on est en train d’étudier, les coups à jouer immédiatement). Les coups de niveau inférieur ne pourront pas être tous explorés, mais seront regardés de plus près quand on avancera dans le jeu et qu'ils arriveront au premier niveau.
 La partie délicate de Monte-Carlo est la sélection de nœud pour l'exploration. Dans un premier temps nous avons considéré  qu’il faut en priorité visiter le nœud qui a le moins de parties jouées, car il a été visité moins de fois que ses « frères ». Mais jouer celui le moins regardé pour l'instant n'est clairement pas la bonne solution sur le long terme. Il faut une solution adaptative, qui va jouer les coups moins regardés au début, puis qui va jouer les meilleurs pour vérifier que ce sont bien les meilleurs. Nous allons donc utiliser les algorithmes de Multi-armed bandit, plus particulièrement UCB1, qui donne de bons résultats.
 (ressource en anglais : \url{http://www.chrisstucchio.com/blog/2012/bandit_algorithms_vs_ab.html})
