@@ -1,0 +1,12 @@
+2ème stratégie :
+
+Pour cette stratégie, Alice aura de nouveau besoin d'un ordre satisfaisant col2(G). A l'aide de cet ordre, elle va faire sa propre coloration du graphe (sans "l'aide" de Bob), cette coloration doit satisfaire les règles suivantes :
+	- Un sommet ne doit pas avoir la même couleur que ses loose backward neighbors.
+	- Les sommets formant un cycle doivent être colorés avec au moins 3 couleurs.
+	- Cette coloration doit utiliser au plus col2(G) couleurs.
+On appelera ce graphe coloré obtenu G'.
+Maintenant, Alice va utiliser G' pour donner une orientation au graphe G. Pour chaque sous-graphe bicolore de G', on oriente les arêtes telles que chaque sommet a un degré sortant de au plus 1. Comme chaque arête n'apparaît que dans un seul sous-graphe, on a orienté l'intégralité du graphe G.
+Nous pouvons désormais commencer notre partie. Un sommet v (coloré d'une couleur c sur le graphe G') sera mis en danger si un de ses voisins entrant est coloré dans une teinte de c. Alice colorant le graphe en accord avec la coloration du graphe G', un sommet ne peut être mis en danger que par Bob et l'orientation du graphe fait qu'il ne peut y avoir qu'un seul sommet en danger par tour.
+Selon cette stratégie, chaque graphe satisfait Xg(G) <= a(G)(a(G)+1).
+
+Où a(G) (nombre chromatic acyclic de G) est le nombre de couleurs minimum utilisées pour un graphe G tel que chaque cycle soit coloré avec au moins 3 couleurs.

@@ -1,0 +1,26 @@
+4ème stratégie :
+
+Le but de cette stratégie et de trouver un meilleur ordonnancement du graphe G sur lequel on utilisera la stratégie d'activation vue précédement.
+
+Nous construisons cet ordre de façon inductive (c'est à dire dans l'ordre inverse).
+Le premier sommet sélectionné sera n'importe quel sommet de G avec un degré de au plus 5.
+Supposons que nous ayons déjà pri les sommets vn, vn-1, ..., vi+1 et nous cherchons un candidat pour vi.
+
+Nous partitionnons les sommets de G en deux parties : C = (vn, vn-1, ..., vi+1) et U = V \ C.
+Nous construisons un nouveau graphe H de la façon suivante :
+	- On supprime les arêtes entre les sommets de C.
+	- On supprime chaque sommet v de C avec au plus 3 sommets dans U.
+	- Pour chaque sommet v supprimé, on ajoute des arêtes entre ses voisins dans U pour former une clique.
+
+Maintenant que nous avons notre graphe H, nous allons attribuer à chaque arête e 2$ réparti sur ses sommets 
+de la manière suivante : 
+	- Si e relie 2 sommets de U, on donne 1$ à chaque sommet de e.
+	- Si e relie x dans U et y dans C, alors on donne 0.50$ à x et 1.50$ à y.
+
+Un fois fait, nous devons trouver un unique sommet ayant une valeur totale inférieure à 6$, ce sera le ième 
+sommet de notre ordre.
+
+Quand notre ordre sera terminer il ne restera plus qu'à utiliser la stratégie d'activation sur cet ordre pendant le jeu.
+
+
+
