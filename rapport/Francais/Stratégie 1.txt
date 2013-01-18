@@ -1,0 +1,13 @@
+Avant propos
+
+Pour bien comprendre les stratégies qui vont suivre, nous devons tout d'abord introduire trois notions importantes qui sont : l'ordre d'un graphe G, les "loose backward neighbors" et le "nombre de 2-coloration" d'un graphe G, noté col2(G).
+Ordre d'un graphe G : Il s'agit d'une représentation linéaire des sommets du graphe G où l'on associe un indice à chaque sommet selon sa position dans l'ordre.
+Loose backward neighbor : Nous avons un ordre du graphe G : v1 v2 v3 ... vn. Un sommet vh est un loose backward neighbor de vi, si h < i et vh est voisin de vi, ou vh et vi ont un voisin commun vj tel que h < i < j.
+Nombre de 2-coloration : Passons en revue l'ensemble des possibilités d'ordre pour un graphe G. Pour chaque ordre, on détermine k le nombre entier tel que chaque sommet de l'ordre a un nombre de loose backward neighbors strictement inférieur à k. On conserve l'ordre ayant le k le plus petit, ce k représente le nombre de 2-coloration, de plus l'ordre associé est un ordre satisfaisant col2(G).
+
+
+
+1ère stratégie:
+
+Avant de débuter la partie, Alice doit trouver un ordre des sommets du graphe G satisfaisant col2(G). Une fois que l'ordre a été trouvé on peut débuter la partie. Lorsque Bob colore un sommet vh, la stratégie d'Alice consiste à chercher dans l'ordre le loose backward neigbor de vh non encore coloré ayant l'indice le plus bas et de le colorer. Si Alice ne trouve pas un tel sommet, elle choisit simplement le sommet non coloré ayant l'indice le plus bas de l'ordre.
+Selon cette stratégie, chaque graphe G satisfait Xg(G) <= X(G)(1+col2(G)).

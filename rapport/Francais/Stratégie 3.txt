@@ -1,0 +1,31 @@
+Daltonism may help
+
+Revenons à quelque chose de beaucoup moins compliqué, la stratégie d'activation. ^^
+Comme pour les stratégies précédentes, on ordonne les sommets du graphe selon col2(G).
+
+Attention : on n'utilise plus les loose backward neighbors mais juste les backward neighbors, 
+c'est à dire les sommets voisins ayant un indice inférieur dans l'ordre.
+
+La stratégie d'activation est simple, lorsque Bob colore un sommet v, Alice commence par ativer 
+ce sommet v puis va regarder ses backward neighbors, soit x le backward neighbor de v ayant 
+l'indice le plus bas, 
+si x est coloré on passe au backward neighbor de v suivant, 
+si x est activé alors il est en danger et on le colore, 
+si x n'est pas activé on l'active et on regarde ses backward neighbors. Si x n'a pas de backward 
+neighbor non coloré alors on colore x.
+Dans le cas où le sommet v (coloré par Bob) n'a pas de backward neighbor non coloré alors 
+on colore le sommet non coloré ayant l'indice le plus bas.
+
+Et voilà!
+
+
+3ème stratégie :
+
+On commence par chercher un ordre satisfaisant col2(G). Attention : à partir de maintenant, on ne s'intéresse plus aux loose backward neighbors mais aux backward neighbors c'est-à-dire les sommets voisins ayant un indice inférieur dans notre ordre.
+La stratégie d'activation est simple, lorsque Bob colore un sommet v, Alice va tout d'abord colorer ce sommet v puis va regarder ses backwards neighbors.
+Soit x le backward neighbor de v ayant l'indice le plus bas,
+	- si x est coloré on passe au backward neighbor suivant,
+	- si x est déjà activé alors il est en danger et doit être coloré par Alice,
+	- si x n'est pas activé, Alice l'active puis va regarder ses backwards neighbors. Si x n'a pas de backward neighbor non coloré alors on colore x.
+Dans le cas où le sommet v n'a pas de backward neighbor non coloré, alors il suffit à Alice de colorer le sommet ayant l'indice le plus petit de l'ordre.
+Selon cette stratégie, chaque graphe satisfait Xg(G) <= 3 col2(G)-1.
