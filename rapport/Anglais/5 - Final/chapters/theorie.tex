@@ -1,2 +1,19 @@
 \chapter{Theory}
 
+To understand the strategies that follow, we first introduce three important concepts:
+\begin{itemize}
+\item the order of a graph $G$
+\item the loose backward neighbors
+\item The number of 2-coloring of a graph $G$, denoted $col^{2}(G)$
+\end{itemize}
+
+The order of a graph $G$ is a linear representation of the vertices of the graph where we associate an index to each vertex according to its position in the order.
+
+For the loose backward neighbor, we define an order of the graph $G$: $v^{1} v^{2} v^{3}... v^{n}$. A vertex $v^{h}$ is a loose backward neighbor of $v^{i}$ if $h < i$ and if $v^{h}$ is in $v^{i}$ neighborhood, or if $v^{h}$ and $v^{i}$ have a common neighbor $v^{j}$ such as $ h < i < j$.
+
+Now, let's review the whole range of orders for a graph $G$. For each order found, we determine the integer $k$ such as each vertex of the order has an number of loose backward neighbors $<$ to $k$. We keep the order which has the smallest $k$. This $k$ is the number of 2-coloring. In addition, the associated order satisfies $col^{2}(G)$.
+
+%\input{sections/theory1}
+%\input{sections/theory2}
+%\input{sections/theory3}
+%\input{sections/theory4}
