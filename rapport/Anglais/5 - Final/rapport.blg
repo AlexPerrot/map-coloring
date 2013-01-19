@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2012/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: rapport.aux
+The style file: plain-fr.bst
+Database file #1: ../refs.bib.bib
+Warning--empty publisher in Minimax
+You've used 4 entries,
+            2238 wiz_defined-function locations,
+            561 strings with 5182 characters,
+and the built_in function-call counts, 1392 in all, are:
+= -- 147
+> -- 48
+< -- 1
++ -- 20
+- -- 16
+* -- 68
+:= -- 263
+add.period$ -- 9
+call.type$ -- 4
+change.case$ -- 18
+chr.to.int$ -- 0
+cite$ -- 5
+duplicate$ -- 56
+empty$ -- 100
+format.name$ -- 16
+if$ -- 304
+int.to.chr$ -- 0
+int.to.str$ -- 4
+missing$ -- 3
+newline$ -- 26
+num.names$ -- 8
+pop$ -- 29
+preamble$ -- 1
+purify$ -- 16
+quote$ -- 0
+skip$ -- 48
+stack$ -- 0
+substring$ -- 83
+swap$ -- 21
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 14
+warning$ -- 1
+while$ -- 10
+width$ -- 5
+write$ -- 47
+(There was 1 warning)
