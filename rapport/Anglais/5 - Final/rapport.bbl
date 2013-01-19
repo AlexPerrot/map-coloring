@@ -1,9 +1,13 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{Cog07banditalgorithm}
 Pierre arnaud Coquelin and Rémi Munos.
 \newblock Bandit algorithm for tree search.
 \newblock Technical report, INRIA, 2007.
+
+\bibitem{Bartnicki07themap-coloring}
+Tomasz Bartnicki, Jarosław Grytczuk, H.~A. Kierstead, and Xuding Zhu.
+\newblock The map-coloring game, 2007.
 
 \bibitem{ChaslotGo}
 G.~Chaslot, J.~Saito, B.~Bouzy, J.~Uiterwijk, and H.~Van Den~Herik.
@@ -30,6 +34,11 @@ Levente Kocsis and Csaba Szepesvári.
 \newblock Bandit based monte-carlo planning.
 \newblock In {\em In: ECML-06. Number 4212 in LNCS}, pages 282--293. Springer,
   2006.
+
+\bibitem{Raspaud20091183}
+Andre Raspaud and Jiaojiao Wu.
+\newblock Game chromatic number of toroidal grids.
+\newblock {\em Information Processing Letters}, 109:1183 -- 1186, 2009.
 
 \bibitem{MAB}
 Chris Stucchio.
