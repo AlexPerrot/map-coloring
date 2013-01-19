@@ -1,32 +1,45 @@
 \begin{thebibliography}{1}
-\expandafter\ifx\csname fonteauteurs\endcsname\relax
-\def\fonteauteurs{\scshape}\fi
+
+\bibitem{Cog07banditalgorithm}
+Pierre arnaud Coquelin and Rémi Munos.
+\newblock Bandit algorithm for tree search.
+\newblock Technical report, INRIA, 2007.
 
 \bibitem{ChaslotGo}
-G.~\bgroup\fonteauteurs\bgroup Chaslot\egroup\egroup{},
-  J.~\bgroup\fonteauteurs\bgroup Saito\egroup\egroup{},
-  B.~\bgroup\fonteauteurs\bgroup Bouzy\egroup\egroup{},
-  J.~\bgroup\fonteauteurs\bgroup Uiterwijk\egroup\egroup{} et
-  H.~\bgroup\fonteauteurs\bgroup Van Den~Herik\egroup\egroup{} :
+G.~Chaslot, J.~Saito, B.~Bouzy, J.~Uiterwijk, and H.~Van Den~Herik.
 \newblock {Monte-carlo strategies for computer go}.
 \newblock {\em Proceedings of the 18th BeNeLux Conference on Artificial
   Intelligence, Namur, Belgium}, pages 83–91+, 2006.
 
+\bibitem{Chaslot_progressivestrategies}
+G.~M. J.~B. Chaslot, M.~H.~M. Win, and B.~Bouzy.
+\newblock Progressive strategies for monte-carlo tree search, 2007.
+
 \bibitem{ChaPHD}
-Guillaume \bgroup\fonteauteurs\bgroup Chaslot\egroup\egroup{} :
+Guillaume Chaslot.
 \newblock {\em Monte-Carlo Tree Search}.
-\newblock Th\`ese de doctorat, Université de Maastricht, 2010.
+\newblock PhD thesis, Université de Maastricht, 2010.
 \newblock \url{http://www.unimaas.nl/games/files/phd/Chaslot_thesis.pdf}.
 
+\bibitem{MCTS_Framework}
+Istvan~Szita Guillaume~Chaslot, Sander~Bakkes and Pieter Spronck.
+\newblock Monte-carlo tree search: A new framework for game ai.
+
+\bibitem{Kocsis06banditbased}
+Levente Kocsis and Csaba Szepesvári.
+\newblock Bandit based monte-carlo planning.
+\newblock In {\em In: ECML-06. Number 4212 in LNCS}, pages 282--293. Springer,
+  2006.
+
 \bibitem{MAB}
-Chris \bgroup\fonteauteurs\bgroup Stucchio\egroup\egroup{} :
+Chris Stucchio.
 \newblock Why multi-armed bandit algorithms are superior to a/b testing.
 \newblock
   \url{http://www.chrisstucchio.com/blog/2012/bandit_algorithms_vs_ab.html},
   2012.
 
 \bibitem{Minimax}
-J~\bgroup\fonteauteurs\bgroup Von~Neumann\egroup\egroup{} :
+J~Von~Neumann.
 \newblock {\em Zur Theorie der Gesellschaftsspiele}.
 \newblock 1928.
 
