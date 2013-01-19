@@ -1,48 +1,48 @@
 This is BibTeX, Version 0.99d (TeX Live 2012/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: rapport.aux
-The style file: plain.bst
+The style file: alpha.bst
 Database file #1: ../refs.bib.bib
 Warning--empty publisher in Minimax
 You've used 10 entries,
-            2118 wiz_defined-function locations,
-            554 strings with 5439 characters,
-and the built_in function-call counts, 3086 in all, are:
-= -- 300
-> -- 142
-< -- 2
-+ -- 57
-- -- 46
-* -- 168
-:= -- 507
+            2543 wiz_defined-function locations,
+            615 strings with 5891 characters,
+and the built_in function-call counts, 3951 in all, are:
+= -- 388
+> -- 203
+< -- 5
++ -- 71
+- -- 70
+* -- 248
+:= -- 655
 add.period$ -- 29
 call.type$ -- 10
-change.case$ -- 52
-chr.to.int$ -- 0
+change.case$ -- 64
+chr.to.int$ -- 10
 cite$ -- 11
-duplicate$ -- 119
-empty$ -- 248
-format.name$ -- 46
-if$ -- 664
-int.to.chr$ -- 0
-int.to.str$ -- 10
+duplicate$ -- 152
+empty$ -- 278
+format.name$ -- 81
+if$ -- 816
+int.to.chr$ -- 1
+int.to.str$ -- 0
 missing$ -- 5
-newline$ -- 51
-num.names$ -- 20
-pop$ -- 75
+newline$ -- 52
+num.names$ -- 30
+pop$ -- 81
 preamble$ -- 1
-purify$ -- 43
+purify$ -- 75
 quote$ -- 0
-skip$ -- 108
+skip$ -- 148
 stack$ -- 0
-substring$ -- 155
+substring$ -- 175
 swap$ -- 36
-text.length$ -- 2
-text.prefix$ -- 0
+text.length$ -- 5
+text.prefix$ -- 2
 top$ -- 0
-type$ -- 38
+type$ -- 76
 warning$ -- 1
-while$ -- 26
-width$ -- 12
-write$ -- 102
+while$ -- 33
+width$ -- 16
+write$ -- 123
 (There was 1 warning)

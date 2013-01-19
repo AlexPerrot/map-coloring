@@ -1,53 +1,54 @@
-\begin{thebibliography}{10}
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{BGKZ07}
 
-\bibitem{Cog07banditalgorithm}
-Pierre arnaud Coquelin and Rémi Munos.
-\newblock Bandit algorithm for tree search.
-\newblock Technical report, INRIA, 2007.
-
-\bibitem{Bartnicki07themap-coloring}
+\bibitem[BGKZ07]{Bartnicki07themap-coloring}
 Tomasz Bartnicki, Jarosław Grytczuk, H.~A. Kierstead, and Xuding Zhu.
 \newblock The map-coloring game, 2007.
 
-\bibitem{ChaslotGo}
-G.~Chaslot, J.~Saito, B.~Bouzy, J.~Uiterwijk, and H.~Van Den~Herik.
-\newblock {Monte-carlo strategies for computer go}.
-\newblock {\em Proceedings of the 18th BeNeLux Conference on Artificial
-  Intelligence, Namur, Belgium}, pages 83–91+, 2006.
+\bibitem[CBSS]{MCTS_Framework}
+Guillaume Chaslot, Sander Bakkes, Istvan Szita, and Pieter Spronck.
+\newblock Monte-carlo tree search: A new framework for game ai.
 
-\bibitem{Chaslot_progressivestrategies}
-G.~M. J.~B. Chaslot, M.~H.~M. Win, and B.~Bouzy.
-\newblock Progressive strategies for monte-carlo tree search, 2007.
-
-\bibitem{ChaPHD}
+\bibitem[Cha10]{ChaPHD}
 Guillaume Chaslot.
 \newblock {\em Monte-Carlo Tree Search}.
 \newblock PhD thesis, Université de Maastricht, 2010.
 \newblock \url{http://www.unimaas.nl/games/files/phd/Chaslot_thesis.pdf}.
 
-\bibitem{MCTS_Framework}
-Istvan~Szita Guillaume~Chaslot, Sander~Bakkes and Pieter Spronck.
-\newblock Monte-carlo tree search: A new framework for game ai.
+\bibitem[CM07]{Cog07banditalgorithm}
+Pierre-Arnaud Coquelin and Rémi Munos.
+\newblock Bandit algorithm for tree search.
+\newblock Technical report, INRIA, 2007.
 
-\bibitem{Kocsis06banditbased}
+\bibitem[CSB{\etalchar{+}}06]{ChaslotGo}
+G.~Chaslot, J.~Saito, B.~Bouzy, J.~Uiterwijk, and H.~Van Den~Herik.
+\newblock {Monte-carlo strategies for computer go}.
+\newblock {\em Proceedings of the 18th BeNeLux Conference on Artificial
+  Intelligence, Namur, Belgium}, pages 83–91+, 2006.
+
+\bibitem[CWB07]{Chaslot_progressivestrategies}
+G.~M. J.~B. Chaslot, M.~H.~M. Win, and B.~Bouzy.
+\newblock Progressive strategies for monte-carlo tree search, 2007.
+
+\bibitem[KS06]{Kocsis06banditbased}
 Levente Kocsis and Csaba Szepesvári.
 \newblock Bandit based monte-carlo planning.
 \newblock In {\em In: ECML-06. Number 4212 in LNCS}, pages 282--293. Springer,
   2006.
 
-\bibitem{Raspaud20091183}
+\bibitem[RW09]{Raspaud20091183}
 Andre Raspaud and Jiaojiao Wu.
 \newblock Game chromatic number of toroidal grids.
 \newblock {\em Information Processing Letters}, 109:1183 -- 1186, 2009.
 
-\bibitem{MAB}
+\bibitem[Stu12]{MAB}
 Chris Stucchio.
 \newblock Why multi-armed bandit algorithms are superior to a/b testing.
 \newblock
   \url{http://www.chrisstucchio.com/blog/2012/bandit_algorithms_vs_ab.html},
   2012.
 
-\bibitem{Minimax}
+\bibitem[VN28]{Minimax}
 J~Von~Neumann.
 \newblock {\em Zur Theorie der Gesellschaftsspiele}.
 \newblock 1928.
