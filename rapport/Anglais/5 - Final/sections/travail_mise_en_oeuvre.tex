@@ -1,20 +1,20 @@
 \section{Implementation of the experiments}
 
 
-In our program, many options are parametrizable. Those can be set using program arguments :
+In our program, many options are parametrizable. Those can be set using program arguments:
 \begin{itemize}
 \item The graph to play on (graphviz format supported)
 \item The number of colors to play with
 \item The number of games to play
 \item The number of simulations to be run by Monte-Carlo before selecting a move
 \end{itemize}
-After some testing, we settled on the following experimental conditions :
+After some testing, we settled on the following experimental conditions:
 \begin{itemize}
 \item A number of simulations of 1000. This seemed to be a good compromise between speed and AI accuracy.
 \item A number of games played of 1000. It seemed again to be a good compromise between computation time and statistical confidence. However, we could not play as many games on the 5x5 grids with a high number of colors (typically 4 or 5). We then tuned down the games to 100 for those cases. 
 \end{itemize}
 
-Here are the results :\\
+Here are the results:\\
 
 \subsection{Chains}
 
@@ -48,7 +48,7 @@ An even cycle demands at least 2 colors to be properly colored. But this time, A
 
 \includegraphics[width=11cm]{resultats/grille25.png}
 
-This little grid is quite similar to an odd cycle : 2-coloriable and Alice wins with 3 colors. This is propably because of the little size of the grid.
+This little grid is quite similar to an odd cycle: 2-coloriable and Alice wins with 3 colors. This is propably because of the little size of the grid.
 
 \subsubsection{5x5}
 
@@ -74,7 +74,7 @@ The toroidal nature of this grid implies that its chromatic number is 3. The gam
 
 Alice needed 4 colors for the perfect ratio, but 3 is not far behind. However, 4 is still far under the bounds of the original article.
 
-\subsubsection{Icosaedron Graph}
+\subsubsection{Icosahedron Graph}
 
 \includegraphics[width=11cm]{resultats/icosaedre.png}
 
