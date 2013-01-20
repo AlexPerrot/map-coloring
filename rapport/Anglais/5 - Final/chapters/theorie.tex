@@ -9,7 +9,11 @@ To understand the strategies that follow, we first introduce three important con
 
 The order of a graph $G$ is a linear representation of the vertices of the graph where we associate an index to each vertex according to its position in the order.
 
+\includegraphics[width=13cm]{IntroOrder.jpg}
+
 For the loose backward neighbor, we define an order of the graph $G$: $v_{1} v_{2} v_{3}... v_{n}$. A vertex $v_{h}$ is a loose backward neighbor of $v_{i}$ if $h < i$ and if $v_{h}$ is in $v_{i}$ neighborhood, or if $v_{h}$ and $v_{i}$ have a common neighbor $v_{j}$ such as $ h < i < j$.
+
+\includegraphics[width=7cm]{looseIntro.jpg}
 
 Now, let's review the whole range of orders for a graph $G$. For each order found, we determine the integer $k$ such as each vertex of the order has a number of loose backward neighbors $<$ to $k$. We keep the order which has the smallest $k$. This $k$ is the number of 2-coloring. In addition, the associated order satisfies $col_{2}(G)$.
 
