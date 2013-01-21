@@ -1,5 +1,6 @@
 \section{Implementation of the experiments}
 
+In our test protocols, we used various graph classes that we chose for their particular topology or for difficulties encountered in their coloration or to represent common cases used in research. All these types of graphs combined cover most of the existing types of graphs.
 
 In our program, many options are parametrizable. Those can be set using program arguments:
 \begin{itemize}
@@ -14,15 +15,34 @@ After some testing, we settled on the following experimental conditions:
 \item A number of games played of 1000. It seemed again to be a good compromise between computation time and statistical confidence. However, we could not play as many games on the 5x5 grids with a high number of colors (typically 4 or 5). We then tuned down the games to 100 for those cases. 
 \end{itemize}
 
+
 Here are the results:\\
 
 \subsection{Chains}
 
+The chains regularly appear in problems that involve calculations of paths. In addition, they provide interesting examples both for their topology and their simplicity.
+
 \subsubsection{Odd number of vertices}
+
+\begin{figure}[h]
+\begin{center}
+    \includegraphics[width=8cm]{graphchaineimpaire.png}
+\end{center}
+    \caption{Example of a chain with an odd number of vertices}
+    \label{chaineimpaire}
+\end{figure}
 
 \includegraphics[width=11cm]{resultats/chaineimpaire.png}
 
 \subsubsection{Even number of vertices}
+
+\begin{figure}[h]
+\begin{center}  
+	\includegraphics[width=8cm]{graphchainepaire.png}
+\end{center}
+    \caption{Example of a chain with an even number of vertices}
+    \label{chainepaire}
+\end{figure}
 
 \includegraphics[width=11cm]{resultats/chainepaire.png}
 
@@ -30,7 +50,17 @@ The chains are 2-coloriable graphs. However, we can see on those curves that 2 c
 
 \subsection{Cycles}
 
+The cycles are used in famous problems such as the traveling salesman problem. They particularly interest us since they form a direct link with the practical applications of graph coloring problems.
+
 \subsubsection{Odd number of vertices}
+
+\begin{figure}[h]
+\begin{center}  
+	\includegraphics[width=6cm]{graphcycleimpair.png}
+\end{center}
+    \caption{Example of a cycle with an odd number of vertices}
+    \label{cycleimpaire}
+\end{figure}
 
 \includegraphics[width=11cm]{resultats/cycleimpair.png}
 
@@ -38,13 +68,31 @@ An odd cycle is not 2-coloriable, but suprisingly Alice seems to win every time 
 
 \subsubsection{Even number of vertices}
 
+\begin{figure}[h]
+\begin{center}  
+	\includegraphics[width=7cm]{graphcyclepair.png}
+\end{center}
+    \caption{Example of a cycle with an odd number of vertices}
+    \label{cyclepaire}
+\end{figure}
+
 \includegraphics[width=11cm]{resultats/cyclepair.png}
 
 An even cycle demands at least 2 colors to be properly colored. But this time, Alice only achieves a 0.5 ratio with 2 colors. She needs 3 colors to be able to beat Bob on every game.
 
 \subsection{Grids}
 
+The grid is the type of graph which consumes the greatest amount of time in term of game simulation. This type of graph is mainly used in the fields of networking and communication. Toroidal grids are particularly relevant to the field of parallel computing.
+
 \subsubsection{2x5}
+
+\begin{figure}[h]
+\begin{center}  
+	\includegraphics[width=11cm]{graphgrille25.png}
+\end{center}
+    \caption{Example of a 2x5 grid}
+    \label{grid25}
+\end{figure}
 
 \includegraphics[width=11cm]{resultats/grille25.png}
 
@@ -52,11 +100,27 @@ This little grid is quite similar to an odd cycle: 2-coloriable and Alice wins w
 
 \subsubsection{5x5}
 
+\begin{figure}[h]
+\begin{center}  
+	\includegraphics[width=11cm]{graphgrille55.png}
+\end{center}
+    \caption{Example of a 5x5 grid}
+    \label{grid55}
+\end{figure}
+
 \includegraphics[width=11cm]{resultats/grille55.png}
 
 This grid is bigger than the previous one. This can be seen on the results : while still being 2-coloriable, our Alice needs at least 5 colors to be able to win every time. Moreover her ratio with 3 colors is only about 0.7 and with 4 colors it is very close but still under a perfect 1 ratio. From this we can conclude that the game chromatic number of this grid is certainly around 4 or 5.
 
 \subsubsection{5x5 toroidal}
+
+\begin{figure}[h]
+\begin{center}  
+	\includegraphics[width=8cm]{graphgrille55tor.png}
+\end{center}
+    \caption{Example of a 5x5 toroidal grid}
+    \label{grid55tor}
+\end{figure}
 
 \includegraphics[width=11cm]{resultats/grilletor55.png}
 
@@ -64,17 +128,45 @@ The toroidal nature of this grid implies that its chromatic number is 3. The gam
 
 \subsection{Binary Tree}
 
+\begin{figure}[h]
+\begin{center}  
+	\includegraphics[width=8cm]{graphbintree3h.png}
+\end{center}
+    \caption{Example of a binary tree}
+    \label{btree}
+\end{figure}
+
 \includegraphics[width=11cm]{resultats/bintree3h.png}
 
 \subsection{Non-Planar Graphs}
 
 \subsubsection{Petersen Graph}
 
+The Petersen graph is named for Julius Petersen, a famous Danish mathematician. The Petersen graph is a special case which is reputed to constitute a good counterexample to many theories that work on other graphs.
+
+\begin{figure}[h]
+\begin{center}  
+	\includegraphics[width=6cm]{graphpetersen.png}
+\end{center}
+    \caption{A Petersen graph}
+    \label{petersengraph}
+\end{figure}
+
 \includegraphics[width=11cm]{resultats/petersen.png}
 
 Alice needed 4 colors for the perfect ratio, but 3 is not far behind. However, 4 is still far under the bounds of the original article.
 
 \subsubsection{Icosahedron Graph}
+
+The Icosahedron is often found in biology in viral structures. We are interested in the particular topology.
+
+\begin{figure}[h]
+\begin{center}  
+	\includegraphics[width=9cm]{graphicosaedre.png}
+\end{center}
+    \caption{An Icosahedron graph}
+    \label{icograph}
+\end{figure}
 
 \includegraphics[width=11cm]{resultats/icosaedre.png}
 
