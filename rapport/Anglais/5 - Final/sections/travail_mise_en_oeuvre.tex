@@ -46,7 +46,7 @@ The chains regularly appear in problems that involve calculations of paths. In a
 
 \includegraphics[width=11cm]{resultats/chainepaire.png}
 
-The chains are 2-coloriable graphs. However, we can see on those curves that 2 colors are not enough for Alice to win every time. Due to the simplicity of the graph, 3 colors seem to be sufficient regardless of the number of vertices in the graph.
+The chains are 2-coloriable graphs. However, we can see on those curves that 2 colors are not enough for Alice to win every time. Due to the simplicity of the graph, 3 colors seem to be sufficient regardless of the number of vertices in the graph. Moreover, on the two curves, we can clearly see that before the break point (3 colors) we have something relatively linear, meaning that Alice could hypothetically win every time with less than 3 colors.
 
 \subsection{Cycles}
 
@@ -78,7 +78,7 @@ An odd cycle is not 2-coloriable, but suprisingly Alice seems to win every time 
 
 \includegraphics[width=11cm]{resultats/cyclepair.png}
 
-An even cycle demands at least 2 colors to be properly colored. But this time, Alice only achieves a 0.5 ratio with 2 colors. She needs 3 colors to be able to beat Bob on every game.
+An even cycle demands at least 2 colors to be properly colored. But this time, Alice only achieves a 0.5 ratio with 2 colors. She needs 3 colors to be able to beat Bob on every game. But seeing that there is no break point in the curve, we can not affirm that Alice can not win every time with 2 colors.
 
 \subsection{Grids}
 
@@ -138,6 +138,8 @@ The toroidal nature of this grid implies that its chromatic number is 3. The gam
 
 \includegraphics[width=11cm]{resultats/bintree3h.png}
 
+In the case of the binary tree, Alice obtains a ration of 1 with 4 colors, but the ratio is very close to 1 with 3 colors. In addition, we observe a break point on the curve at 3 colors. We can therefore assume that the game chromatic number of this graph could be between 3 and 4.
+
 \subsection{Non-Planar Graphs}
 
 \subsubsection{Petersen Graph}
@@ -154,7 +156,7 @@ The Petersen graph is named for Julius Petersen, a famous Danish mathematician. 
 
 \includegraphics[width=11cm]{resultats/petersen.png}
 
-Alice needed 4 colors for the perfect ratio, but 3 is not far behind. However, 4 is still far under the bounds of the original article.
+Alice needed 4 colors for the perfect ratio, but 3 is not far behind. However, 4 is still far under the bounds of the original article. In addition, we observe a steep curve between 1 and 3 colors. We can therefore assume that 3 colors would be a good candidate to define a new limit for the game chromatic number of this type of graph.
 
 \subsubsection{Icosahedron Graph}
 
