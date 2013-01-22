@@ -19,3 +19,21 @@ Considering the fact that introducing a new color in the game is isomorphic rega
 \]\[
 = c!c^{v-c} \prod_{i=0}^{i<v}(v-i) = c!c^{v-c}v!
 \]
+
+Of course, not all of these games will lead to a proper coloring, so a certain amount will stop before coloring every vertex. We can use the assymptotic notation to describe that :
+\[
+Number\ of\ possible\ games = O(c^vv!)\footnote{We used this formula because it is simpler and gives the same order inside the O() notation}
+\]
+
+To calculate the number of nodes in the tree, we need to know th followings:\\
+\begin{itemize}
+\item The height of the tree is $v$.
+\item Its branching factor is at most $vc$
+\end{itemize}
+We can then define the number of nodes at a certain height as a geometric sequence whose common ratio is $vc$ and start value is $1$\footnote{The number of nodes on the level $0$, where there is only the root}. The total number of nodes in the tree is the associated geometric serie, defined as follow:
+\[
+\sum_{i=0}^{i\leq v}(vc)^i = \frac{1-(vc)^{v+1}}{1-vc}
+\]
+We can conclude that : $Number\ of\ nodes = O((vc)^v)$
+
+\subsection{Time complexity of a game}
