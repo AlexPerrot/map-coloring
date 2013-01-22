@@ -7,25 +7,25 @@ In this section, we present a short (and probably inaccurate) study of the space
 We will first try to calculate how many different games are possible on a given graph. We will call $v$ its number of vertices and $c$ the number of colors used for the game. We have $c\leq v$.
 
 Lets think about the way a map-coloring is played and the number of choices for each move. On the first move, $v$ vertices can be colored with $c$ colors, leading to $vc$ choices. On the second move, $v-1$ vertices can be colored using $c$ colors, for $c(v-1)$ choices. Up until the last move, where $(v-(v-1))=1$ can be colored with $c$ colors. The total number of possible different games is :
-\[
-cv*c(v-1)*c(v-2)*...*c2*c1 =
-\prod_{i=0}^{i<v}c(v-i) =
-c^v \prod_{i=0}^{i<v}v-i = c^v*v!
-\]
+\begin{align*}
+cv*c(v-1)*c(v-2)*...*c2*c1 &=
+\prod_{i=0}^{i<v}c(v-i)\\  &=
+c^v \prod_{i=0}^{i<v}v-i \\ &= c^v*v!
+\end{align*}
 
 Considering the fact that introducing a new color in the game is isomorphic regardless of the color chosen, we can reduce the number of colors for a move to the number of colors already used plus one (the new color), up until $c$. This leads to the following calculations :
-\[
-1v*2(v-1)*...*c2*c1 = \prod_{i=0}^{i<c} (i+1)(v-i) \prod_{i=c}^{i<v} c(v-i)
-\]\[
-= c!c^{v-c} \prod_{i=0}^{i<v}(v-i) = c!c^{v-c}v!
-\]
+\begin{align*}
+1v*2(v-1)*...*c2*c1 &= \prod_{i=0}^{i<c} (i+1)(v-i) \prod_{i=c}^{i<v} c(v-i)\\
+&= c!c^{v-c} \prod_{i=0}^{i<v}(v-i)\\
+ &= c!c^{v-c}v!
+\end{align*}
 
 Of course, not all of these games will lead to a proper coloring, so a certain amount will stop before coloring every vertex. We can use the assymptotic notation to describe that :
 \[
 Number\ of\ possible\ games = O(c^vv!)\footnote{We used this formula because it is simpler and gives the same order inside the O() notation}
 \]
 
-To calculate the number of nodes in the tree, we need to know th followings:\\
+To calculate the number of nodes in the tree, we need to know the followings:
 \begin{itemize}
 \item The height of the tree is $v$.
 \item Its branching factor is at most $vc$
@@ -37,3 +37,28 @@ We can then define the number of nodes at a certain height as a geometric sequen
 We can conclude that : $Number\ of\ nodes = O((vc)^v)$
 
 \subsection{Time complexity of a game}
+
+First of all, we will study the complexity of a single move. Playing a move consists of playing a certain number of simulations until the end of the game. Playing a simulation is composed of two parts : the selection algorithm and the moves themeselves. The selection algorithm complexity is $O(cv)$, because it selects a node from the possible moves by finding the maximum node from an unsorted list.
+
+Now, let's take a look at the complexity of a simulated game. Until the end of the game, we select a node. The number of nodes uncolored after $i$ turns is $v-i$. Thus, selecting a node at turn $i$ is of complexity $O(c(v-i))$. This process is repeated until $i=v$, so the complexity of a simulation at turn $i$ is:
+
+\begin{align*}
+\sum_{j=i}^{j<v}(v-j)c &= c \sum_{j=0}^{j\leq (v-i)}j \\
+&= c\frac{(v-i)(v-i+1)}{2} \\
+&= c\frac{(v-i)^2+(v-i)}{2} \\
+&= O(c(v-i)^2)
+\end{align*}
+
+This simulation process is repeated $n$ times before choosing a move to play. The complexity of a move on turn $i$ is then:
+$$ C_{m_i} = O(nc(v-i)^2+c(v-i)) = O(nc(v-i)^2) $$
+
+Finally, the complexity of the entire game is:
+\begin{align*}
+C_g &= \sum_{i=0}^{i<v}nc(v-i)^2 \\
+&= nc \sum_{i=0}^{i<v}(v-i)^2 \\
+&= nc \frac{v(v+1)(2v+1)}{6} \text{\tiny{   Remark : This is the sum of the $v$ first square numbers}} \\
+&= nc \frac{2v^3+3v^2+v}{6} \\
+&= O(ncv^3)
+\end{align*}
+
+We can see that this algorithm highly depends on the number of vertices in the graph, partly because of the selection algorithm. The total complexity could maybe drop to $O(ncv^2)$ if the selection algorithm was in $O(1)$. This could certainly be achieved by using the proper data structure to manage children of a node, like a maximum heap, or by sorting the children list. Those modifications would however introduce a small sorting time after each simulation, but far less than the linear selection algorithm.
