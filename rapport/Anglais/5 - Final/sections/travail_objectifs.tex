@@ -1,0 +1,3 @@
+\section{Objectives}
+
+After the study of the article, we agreed on implementing an AI to play the game. We wanted to know how would a computer program compete against the article's theoretical bounds. The first step was to choose the type of algorithmto use for this AI. Seeing how the move space was large (we were later comforted in this idea by our complexity study), Monte-Carlo Tree Search seemed to be the best choice for it allows good decisions without exploring the entire tree. Another important constraint was our inability to evaluate the profit of a game's position for a player before the game has ended. We could therefore not use more classical AI algorithms, where the tree search is stopped at a constant depth and the game state is evaluated before its end.
